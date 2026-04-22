@@ -12,7 +12,7 @@
       --bg-secondary: #0f1524;
       --bg-card: #141c30;
       --text-primary: #ffffff;
-      --text-secondary: #a8b4cc;
+      --text-secondary: #b8c4d8;
       --text-muted: #5a6a8a;
       --accent-main: #1e9bd8;
       --accent-main-dim: rgba(30, 155, 216, 0.15);
@@ -26,7 +26,7 @@
 
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-    body { font-family: var(--font-body); background: var(--bg-primary); color: var(--text-primary); line-height: 1.6; overflow-x: hidden; }
+    body { font-family: var(--font-body); background: var(--bg-primary); color: var(--text-primary); line-height: 1.7; overflow-x: hidden; }
     a { color: var(--accent-main); text-decoration: none; transition: opacity 0.2s; }
     a:hover { opacity: 0.8; }
     .container { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
@@ -53,11 +53,14 @@
     .nav-cta:hover { opacity: 0.9 !important; }
     .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
     .nav-toggle span { display: block; width: 24px; height: 2px; background: var(--text-primary); margin: 5px 0; transition: 0.3s; }
+    .nav-toggle.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav-toggle.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
 
     /* PAGE HEADER */
     .page-header { padding-top: calc(var(--nav-height) + 80px); padding-bottom: 64px; text-align: center; position: relative; overflow: hidden; }
     .page-header::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 800px; height: 400px; background: radial-gradient(ellipse at 50% 0%, rgba(30, 155, 216, 0.07), transparent 70%); pointer-events: none; }
-    .page-header-label { font-family: var(--font-display); font-size: 0.7rem; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: var(--accent-gold); margin-bottom: 16px; display: flex; align-items: center; justify-content: center; gap: 12px; }
+    .page-header-label { font-family: var(--font-display); font-size: 0.8rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--accent-gold); margin-bottom: 16px; display: flex; align-items: center; justify-content: center; gap: 12px; }
     .page-header-label::before, .page-header-label::after { content: ''; width: 30px; height: 1px; background: var(--accent-gold); }
     .page-header h1 { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700; letter-spacing: -1px; margin-bottom: 16px; }
     .page-header p { color: var(--text-secondary); font-size: 1.05rem; font-weight: 300; max-width: 500px; margin: 0 auto; }
@@ -104,8 +107,8 @@
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
     /* FOOTER */
-    .footer { border-top: 1px solid var(--border-color); padding: 32px 0; text-align: center; }
-    .footer p { font-size: 0.8rem; color: var(--text-muted); }
+    .footer { border-top: 1px solid var(--border-color); padding: 40px 0; text-align: center; }
+    .footer p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
 
     @media (max-width: 768px) {
       .nav-links { display: none; }
@@ -119,7 +122,7 @@
   <nav class="nav" id="mainNav">
     <div class="container">
       <a href="index.html" class="nav-logo"><span>[</span>ROBOTICS<span>]</span></a>
-      <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Toggle menu">
+      <button class="nav-toggle" onclick="this.classList.toggle('open'); document.querySelector('.nav-links').classList.toggle('open');" aria-label="Toggle menu">
         <span></span><span></span><span></span>
       </button>
       <ul class="nav-links">
@@ -141,45 +144,45 @@
 
   <section class="achievements-section">
     <div class="container">
-      <div class="timeline reveal">
+      <div class="timeline">
 
-        <div class="timeline-item">
+        <div class="timeline-item reveal">
           <div class="timeline-year">2026 Season</div>
           <h3 class="timeline-title">5805 — District Event Finalist</h3>
           <p class="timeline-desc">SMbly Required advanced to the playoff finals at the CA District Hueneme Port Event, losing a nail-biter championship match by a single point (169–170). Currently ranked #47 in the California District.</p>
         </div>
 
-        <div class="timeline-item">
+        <div class="timeline-item reveal">
           <div class="timeline-year">2025 Season</div>
           <h3 class="timeline-title">5805 — Regional Winners &amp; Beach Blitz Champions</h3>
           <p class="timeline-desc">SMbly Required had a breakout year — winning both the Ventura County Regional and the Beach Blitz off-season event, and reaching the finals of the SoCal Showdown.</p>
         </div>
 
-        <div class="timeline-item">
+        <div class="timeline-item reveal">
           <div class="timeline-year">2022 Season</div>
           <h3 class="timeline-title">3020 — Orange County Regional Finalist</h3>
           <p class="timeline-desc">SMbld made a strong post-COVID return, advancing to the finals at the Orange County Regional.</p>
         </div>
 
-        <div class="timeline-item">
+        <div class="timeline-item reveal">
           <div class="timeline-year">2019 Season</div>
           <h3 class="timeline-title">5805 — Regional Finalist &amp; World Championship</h3>
           <p class="timeline-desc">SMbly Required earned a Regional Finalist award and Wildcard at the Orange County Regional, punching their ticket to the FIRST Championship on the Turing Division.</p>
         </div>
 
-        <div class="timeline-item">
+        <div class="timeline-item reveal">
           <div class="timeline-year">2018 Season</div>
           <h3 class="timeline-title">5805 — Orange County Regional Winners</h3>
           <p class="timeline-desc">In just their third season, SMbly Required won the Orange County Regional and competed at the FIRST Championship on the Carver Division.</p>
         </div>
 
-        <div class="timeline-item">
+        <div class="timeline-item reveal">
           <div class="timeline-year">2016 Season</div>
           <h3 class="timeline-title">5805 — Rookie All Star &amp; Highest Rookie Seed</h3>
           <p class="timeline-desc">SMbly Required burst onto the scene in their debut year, earning both the Rookie All Star Award and the Highest Rookie Seed at the San Diego Regional, then competing at the FIRST Championship.</p>
         </div>
 
-        <div class="timeline-item">
+        <div class="timeline-item reveal">
           <div class="timeline-year">2009 Season</div>
           <h3 class="timeline-title">3020 — Rookie All Star Award</h3>
           <p class="timeline-desc">SMbld launched the robotics program at Santa Margarita Catholic High School, earning the prestigious Rookie All Star Award at the Los Angeles Regional in their inaugural season.</p>
@@ -199,7 +202,10 @@
     const nav = document.getElementById('mainNav');
     window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 50), { passive: true });
     document.querySelectorAll('.nav-links a').forEach(link => {
-      link.addEventListener('click', () => document.querySelector('.nav-links').classList.remove('open'));
+      link.addEventListener('click', () => {
+        document.querySelector('.nav-links').classList.remove('open');
+        document.querySelector('.nav-toggle').classList.remove('open');
+      });
     });
 
     const revealEls = document.querySelectorAll('.reveal');

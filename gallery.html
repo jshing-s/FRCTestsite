@@ -13,7 +13,7 @@
       --bg-card: #141c30;
       --bg-card-hover: #1a2540;
       --text-primary: #ffffff;
-      --text-secondary: #a8b4cc;
+      --text-secondary: #b8c4d8;
       --text-muted: #5a6a8a;
       --accent-main: #1e9bd8;
       --accent-main-dim: rgba(30, 155, 216, 0.15);
@@ -40,7 +40,7 @@
       font-family: var(--font-body);
       background: var(--bg-primary);
       color: var(--text-primary);
-      line-height: 1.6;
+      line-height: 1.7;
       overflow-x: hidden;
     }
 
@@ -160,6 +160,10 @@
       transition: 0.3s;
     }
 
+    .nav-toggle.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav-toggle.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
     /* ======== PAGE HEADER ======== */
     .page-header {
       padding-top: calc(var(--nav-height) + 80px);
@@ -181,9 +185,9 @@
 
     .page-header-label {
       font-family: var(--font-display);
-      font-size: 0.7rem;
+      font-size: 0.8rem;
       font-weight: 600;
-      letter-spacing: 4px;
+      letter-spacing: 2px;
       text-transform: uppercase;
       color: var(--accent-gold);
       margin-bottom: 16px;
@@ -256,16 +260,16 @@
     }
 
     .gallery-grid {
-      columns: 3 300px;
-      column-gap: 16px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
       padding: 0 24px;
       max-width: var(--max-width);
       margin: 0 auto;
     }
 
     .gallery-item {
-      break-inside: avoid;
-      margin-bottom: 16px;
+      aspect-ratio: 4/3;
       position: relative;
       overflow: hidden;
       cursor: pointer;
@@ -281,7 +285,8 @@
 
     .gallery-item img {
       width: 100%;
-      height: auto;
+      height: 100%;
+      object-fit: cover;
       display: block;
       transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), filter 0.3s;
       filter: brightness(0.92);
@@ -491,7 +496,7 @@
       }
 
       .gallery-grid {
-        columns: 2 200px;
+        grid-template-columns: repeat(2, 1fr);
       }
 
       .lightbox-prev { left: 8px; }
@@ -500,7 +505,7 @@
 
     @media (max-width: 480px) {
       .gallery-grid {
-        columns: 1;
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -514,7 +519,7 @@
         <span>[</span>ROBOTICS<span>]</span>
       </a>
 
-      <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Toggle menu">
+      <button class="nav-toggle" onclick="this.classList.toggle('open'); document.querySelector('.nav-links').classList.toggle('open');" aria-label="Toggle menu">
         <span></span><span></span><span></span>
       </button>
 
@@ -760,6 +765,7 @@
     document.querySelectorAll('.nav-links a').forEach(link => {
       link.addEventListener('click', () => {
         document.querySelector('.nav-links').classList.remove('open');
+        document.querySelector('.nav-toggle').classList.remove('open');
       });
     });
 
