@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What We Do — Teams 3020 & 5805</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0b0f1a;
+      --bg-secondary: #0f1524;
+      --bg-card: #141c30;
+      --text-primary: #ffffff;
+      --text-secondary: #a8b4cc;
+      --text-muted: #5a6a8a;
+      --accent-main: #1e9bd8;
+      --accent-main-dim: rgba(30, 155, 216, 0.15);
+      --accent-gold: #bca465;
+      --border-color: rgba(30, 155, 216, 0.08);
+      --border-glow: rgba(30, 155, 216, 0.25);
+      --font-display: 'Chakra Petch', sans-serif;
+      --font-body: 'IBM Plex Sans', sans-serif;
+      --nav-height: 72px;
+      --max-width: 1200px;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-body); background: var(--bg-secondary); color: var(--text-primary); line-height: 1.6; overflow-x: hidden; }
+    a { color: var(--accent-main); text-decoration: none; transition: opacity 0.2s; }
+    a:hover { opacity: 0.8; }
+    .container { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
+
+    body::before {
+      content: ''; position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 9999;
+    }
+
+    /* NAV */
+    .nav { position: fixed; top: 0; left: 0; right: 0; height: var(--nav-height); background: rgba(11, 15, 26, 0.85); backdrop-filter: blur(20px) saturate(1.2); border-bottom: 1px solid var(--border-color); z-index: 1000; display: flex; align-items: center; transition: background 0.3s, box-shadow 0.3s; }
+    .nav.scrolled { background: rgba(11, 15, 26, 0.95); box-shadow: 0 4px 30px rgba(0,0,0,0.3); }
+    .nav .container { display: flex; align-items: center; justify-content: space-between; width: 100%; }
+    .nav-logo { font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; color: var(--text-primary); letter-spacing: 1px; text-transform: uppercase; }
+    .nav-logo span { color: var(--accent-main); }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a { color: var(--text-secondary); font-size: 0.875rem; font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase; transition: color 0.2s; position: relative; }
+    .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--accent-main); transition: width 0.3s ease; }
+    .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+    .nav-links a:hover, .nav-links a.active { color: var(--text-primary); opacity: 1; }
+    .nav-cta { background: var(--accent-main); color: var(--bg-primary) !important; padding: 8px 20px; border-radius: 4px; font-weight: 600; font-size: 0.8rem; letter-spacing: 0.5px; }
+    .nav-cta::after { display: none !important; }
+    .nav-cta:hover { opacity: 0.9 !important; }
+    .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+    .nav-toggle span { display: block; width: 24px; height: 2px; background: var(--text-primary); margin: 5px 0; transition: 0.3s; }
+
+    /* PAGE HEADER */
+    .page-header { padding-top: calc(var(--nav-height) + 80px); padding-bottom: 64px; text-align: center; position: relative; overflow: hidden; }
+    .page-header::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 800px; height: 400px; background: radial-gradient(ellipse at 50% 0%, rgba(30, 155, 216, 0.07), transparent 70%); pointer-events: none; }
+    .page-header-label { font-family: var(--font-display); font-size: 0.7rem; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: var(--accent-gold); margin-bottom: 16px; display: flex; align-items: center; justify-content: center; gap: 12px; }
+    .page-header-label::before, .page-header-label::after { content: ''; width: 30px; height: 1px; background: var(--accent-gold); }
+    .page-header h1 { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700; letter-spacing: -1px; margin-bottom: 16px; }
+    .page-header p { color: var(--text-secondary); font-size: 1.05rem; font-weight: 300; max-width: 500px; margin: 0 auto; }
+
+    /* WHAT WE DO */
+    .what-section { padding: 0 0 100px; }
+
+    .roles-marquee { margin-bottom: 48px; position: relative; overflow: hidden; padding: 8px 0; }
+    .roles-marquee::before, .roles-marquee::after { content: ''; position: absolute; top: 0; bottom: 0; width: 150px; z-index: 2; pointer-events: none; }
+    .roles-marquee::before { left: 0; background: linear-gradient(to right, var(--bg-secondary), transparent); }
+    .roles-marquee::after { right: 0; background: linear-gradient(to left, var(--bg-secondary), transparent); }
+
+    .marquee-track { display: flex; gap: 20px; animation: marquee-scroll 35s linear infinite; }
+    .marquee-track:hover { animation-play-state: paused; }
+    @keyframes marquee-scroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(calc(-50% - 10px)); }
+    }
+
+    .role-card { flex-shrink: 0; width: 300px; padding: 28px 24px; background: linear-gradient(to bottom, var(--bg-card), rgba(20, 28, 48, 0.5)); border: 1px solid var(--border-color); border-top: 2px solid transparent; border-image: linear-gradient(90deg, var(--accent-main), var(--accent-gold)) 1; border-image-slice: 1 0 0 0; transition: transform 0.3s, box-shadow 0.3s; }
+    .role-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25); }
+    .role-icon { font-size: 2rem; margin-bottom: 14px; }
+    .role-card h3 { font-family: var(--font-display); font-size: 1.05rem; font-weight: 600; margin-bottom: 10px; }
+    .role-card p { color: var(--text-secondary); font-size: 0.85rem; line-height: 1.55; }
+
+    .join-cta { text-align: center; padding: 48px; border: 1px dashed var(--border-glow); background: var(--accent-main-dim); position: relative; overflow: hidden; }
+    .join-cta::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 50% 50%, rgba(30, 155, 216, 0.08), transparent 70%); animation: ctaPulse 4s ease-in-out infinite; }
+    @keyframes ctaPulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.5); opacity: 0; } }
+    .join-cta h3 { font-family: var(--font-display); font-size: 1.75rem; font-weight: 700; margin-bottom: 12px; position: relative; }
+    .join-cta p { color: var(--text-secondary); margin-bottom: 24px; position: relative; }
+    .join-cta .btn { position: relative; }
+
+    .btn { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-display); font-size: 0.875rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; padding: 14px 32px; border: none; cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+    .btn-primary { background: var(--accent-main); color: var(--bg-primary); }
+    .btn-primary:hover { box-shadow: 0 0 40px rgba(30, 155, 216, 0.4); color: var(--bg-primary); opacity: 1; transform: translateY(-2px); }
+
+    /* REVEAL */
+    .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* FOOTER */
+    .footer { border-top: 1px solid var(--border-color); padding: 32px 0; text-align: center; }
+    .footer p { font-size: 0.8rem; color: var(--text-muted); }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-toggle { display: block; }
+      .nav-links.open { display: flex; flex-direction: column; position: absolute; top: var(--nav-height); left: 0; right: 0; background: rgba(11, 15, 26, 0.97); backdrop-filter: blur(16px); padding: 24px; gap: 20px; border-bottom: 1px solid var(--border-color); }
+      .roles-marquee::before, .roles-marquee::after { width: 60px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav" id="mainNav">
+    <div class="container">
+      <a href="index.html" class="nav-logo"><span>[</span>ROBOTICS<span>]</span></a>
+      <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="about.html">About</a></li>
+        <li><a href="teams.html">Teams</a></li>
+        <li><a href="what-we-do.html" class="active">What We Do</a></li>
+        <li><a href="achievements.html">Achievements</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="sponsors.html" class="nav-cta">Become a Sponsor</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header class="page-header">
+    <p class="page-header-label">What We Do</p>
+    <h1>Where Your Support Goes</h1>
+    <p>Your sponsorship fuels every aspect of our program — from engineering and fabrication to community impact.</p>
+  </header>
+
+  <section class="what-section">
+    <div class="container">
+
+      <div class="roles-marquee reveal">
+        <div class="marquee-track">
+          <!-- Set 1 -->
+          <div class="role-card"><div class="role-icon">⚙️</div><h3>Mechanical Engineering</h3><p>Students design and fabricate the robot's structure, mechanisms, and drivetrain using industry-standard tools, CNC machining, and hands-on building.</p></div>
+          <div class="role-card"><div class="role-icon">💻</div><h3>Software & Autonomous</h3><p>Teams write code in Java and Python for autonomous routines, driver controls, computer vision, and sensor integration — real-world programming experience.</p></div>
+          <div class="role-card"><div class="role-icon">🔌</div><h3>Electrical Systems</h3><p>Wiring, power distribution, motor controllers, and sensor integration. Students learn circuit design and troubleshooting on complex robotic systems.</p></div>
+          <div class="role-card"><div class="role-icon">🎨</div><h3>3D Design & CAD</h3><p>Students create detailed 3D models and technical drawings in SolidWorks and Onshape, turning concepts into manufacturing-ready plans.</p></div>
+          <div class="role-card"><div class="role-icon">🏭</div><h3>Fabrication & Prototyping</h3><p>From 3D printing to CNC routing and metal work, students gain hands-on manufacturing skills building functional robot components.</p></div>
+          <div class="role-card"><div class="role-icon">🧪</div><h3>Testing & Strategy</h3><p>Rigorous testing cycles, match strategy analysis, and data-driven scouting teach students the scientific method and critical thinking.</p></div>
+          <div class="role-card"><div class="role-icon">📢</div><h3>Business & Marketing</h3><p>Students manage budgets, write grant proposals, build brand identity, and run social media — real business skills for real-world applications.</p></div>
+          <div class="role-card"><div class="role-icon">🎬</div><h3>Media & Documentation</h3><p>Photography, videography, and graphic design bring the season to life. Students produce content for social media, sponsor reports, and events.</p></div>
+          <div class="role-card"><div class="role-icon">🤝</div><h3>Community Outreach</h3><p>STEM workshops, school demos, and mentoring younger teams. Our students give back and inspire the next generation of innovators.</p></div>
+          <!-- Set 2 (duplicate for seamless loop) -->
+          <div class="role-card"><div class="role-icon">⚙️</div><h3>Mechanical Engineering</h3><p>Students design and fabricate the robot's structure, mechanisms, and drivetrain using industry-standard tools, CNC machining, and hands-on building.</p></div>
+          <div class="role-card"><div class="role-icon">💻</div><h3>Software & Autonomous</h3><p>Teams write code in Java and Python for autonomous routines, driver controls, computer vision, and sensor integration — real-world programming experience.</p></div>
+          <div class="role-card"><div class="role-icon">🔌</div><h3>Electrical Systems</h3><p>Wiring, power distribution, motor controllers, and sensor integration. Students learn circuit design and troubleshooting on complex robotic systems.</p></div>
+          <div class="role-card"><div class="role-icon">🎨</div><h3>3D Design & CAD</h3><p>Students create detailed 3D models and technical drawings in SolidWorks and Onshape, turning concepts into manufacturing-ready plans.</p></div>
+          <div class="role-card"><div class="role-icon">🏭</div><h3>Fabrication & Prototyping</h3><p>From 3D printing to CNC routing and metal work, students gain hands-on manufacturing skills building functional robot components.</p></div>
+          <div class="role-card"><div class="role-icon">🧪</div><h3>Testing & Strategy</h3><p>Rigorous testing cycles, match strategy analysis, and data-driven scouting teach students the scientific method and critical thinking.</p></div>
+          <div class="role-card"><div class="role-icon">📢</div><h3>Business & Marketing</h3><p>Students manage budgets, write grant proposals, build brand identity, and run social media — real business skills for real-world applications.</p></div>
+          <div class="role-card"><div class="role-icon">🎬</div><h3>Media & Documentation</h3><p>Photography, videography, and graphic design bring the season to life. Students produce content for social media, sponsor reports, and events.</p></div>
+          <div class="role-card"><div class="role-icon">🤝</div><h3>Community Outreach</h3><p>STEM workshops, school demos, and mentoring younger teams. Our students give back and inspire the next generation of innovators.</p></div>
+        </div>
+      </div>
+
+      <div class="join-cta reveal">
+        <h3>Invest in the Next Generation</h3>
+        <p>Every dollar goes directly toward materials, tools, registration, and travel — empowering students to learn by doing.</p>
+        <a href="sponsors.html" class="btn btn-primary">Sponsor Our Program →</a>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p>FRC Teams 3020 &amp; 5805 — Santa Margarita Catholic High School &nbsp;·&nbsp; <a href="index.html">← Back to home</a></p>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 50), { passive: true });
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => document.querySelector('.nav-links').classList.remove('open'));
+    });
+
+    const revealEls = document.querySelectorAll('.reveal');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    revealEls.forEach(el => obs.observe(el));
+  </script>
+
+</body>
+</html>

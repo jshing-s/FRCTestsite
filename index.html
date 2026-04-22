@@ -7,55 +7,32 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
-    /* ========================================
-       CSS VARIABLES — Edit these to rebrand!
-       ======================================== */
     :root {
       --bg-primary: #0b0f1a;
       --bg-secondary: #0f1524;
       --bg-card: #141c30;
       --bg-card-hover: #1a2540;
-
       --text-primary: #ffffff;
       --text-secondary: #a8b4cc;
       --text-muted: #5a6a8a;
-
-      /* Brand colors: #21409a (navy), #bca465 (gold), #1e9bd8 (sky blue) */
-      --accent-main: #1e9bd8;       /* Sky blue — primary accent */
+      --accent-main: #1e9bd8;
       --accent-main-dim: rgba(30, 155, 216, 0.15);
-      --accent-gold: #bca465;       /* Gold — subtle/small features */
+      --accent-gold: #bca465;
       --accent-gold-dim: rgba(188, 164, 101, 0.15);
-      --accent-team-a: #1e9bd8;     /* Team 3020 — sky blue */
-      --accent-team-a-dim: rgba(30, 155, 216, 0.15);
-      --accent-team-b: #21409a;     /* Team 5805 — deep navy */
-      --accent-team-b-dim: rgba(33, 64, 154, 0.2);
       --navy: #21409a;
       --navy-dim: rgba(33, 64, 154, 0.15);
-
       --border-color: rgba(30, 155, 216, 0.08);
       --border-glow: rgba(30, 155, 216, 0.25);
-
       --font-display: 'Chakra Petch', sans-serif;
       --font-body: 'IBM Plex Sans', sans-serif;
-
       --nav-height: 72px;
       --max-width: 1200px;
       --section-padding: 100px;
     }
 
-    /* ========================================
-       RESET & BASE
-       ======================================== */
-    *, *::before, *::after {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-    html {
-      scroll-behavior: smooth;
-      scroll-padding-top: var(--nav-height);
-    }
+    html { scroll-behavior: smooth; scroll-padding-top: var(--nav-height); }
 
     body {
       font-family: var(--font-body);
@@ -65,18 +42,10 @@
       overflow-x: hidden;
     }
 
-    a {
-      color: var(--accent-main);
-      text-decoration: none;
-      transition: opacity 0.2s;
-    }
-
+    a { color: var(--accent-main); text-decoration: none; transition: opacity 0.2s; }
     a:hover { opacity: 0.8; }
 
-    img {
-      max-width: 100%;
-      display: block;
-    }
+    img { max-width: 100%; display: block; }
 
     .container {
       max-width: var(--max-width);
@@ -84,9 +53,6 @@
       padding: 0 24px;
     }
 
-    /* ========================================
-       NOISE OVERLAY — adds texture
-       ======================================== */
     body::before {
       content: '';
       position: fixed;
@@ -96,13 +62,9 @@
       z-index: 9999;
     }
 
-    /* ========================================
-       CURSOR GLOW EFFECT
-       ======================================== */
     .cursor-glow {
       position: fixed;
-      width: 400px;
-      height: 400px;
+      width: 400px; height: 400px;
       border-radius: 50%;
       background: radial-gradient(circle, rgba(30, 155, 216, 0.07) 0%, transparent 70%);
       pointer-events: none;
@@ -111,14 +73,10 @@
       transition: opacity 0.3s;
     }
 
-    /* ========================================
-       NAVIGATION
-       ======================================== */
+    /* ======== NAV ======== */
     .nav {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
+      top: 0; left: 0; right: 0;
       height: var(--nav-height);
       background: rgba(11, 15, 26, 0.85);
       backdrop-filter: blur(20px) saturate(1.2);
@@ -134,12 +92,7 @@
       box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
     }
 
-    .nav .container {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      width: 100%;
-    }
+    .nav .container { display: flex; align-items: center; justify-content: space-between; width: 100%; }
 
     .nav-logo {
       font-family: var(--font-display);
@@ -150,15 +103,9 @@
       text-transform: uppercase;
     }
 
-    .nav-logo span {
-      color: var(--accent-main);
-    }
+    .nav-logo span { color: var(--accent-main); }
 
-    .nav-links {
-      display: flex;
-      gap: 32px;
-      list-style: none;
-    }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
 
     .nav-links a {
       color: var(--text-secondary);
@@ -173,22 +120,17 @@
     .nav-links a::after {
       content: '';
       position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 0;
-      height: 2px;
+      bottom: -4px; left: 0;
+      width: 0; height: 2px;
       background: var(--accent-main);
       transition: width 0.3s ease;
     }
 
-    .nav-links a:hover::after {
-      width: 100%;
-    }
+    .nav-links a:hover::after,
+    .nav-links a.active::after { width: 100%; }
 
-    .nav-links a:hover {
-      color: var(--text-primary);
-      opacity: 1;
-    }
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--text-primary); opacity: 1; }
 
     .nav-cta {
       background: var(--accent-main);
@@ -198,19 +140,11 @@
       font-weight: 600;
       font-size: 0.8rem;
       letter-spacing: 0.5px;
-      position: relative;
-      overflow: hidden;
     }
 
-    .nav-cta::after {
-      display: none;
-    }
+    .nav-cta::after { display: none !important; }
+    .nav-cta:hover { opacity: 0.9 !important; }
 
-    .nav-cta:hover {
-      opacity: 0.9 !important;
-    }
-
-    /* Mobile menu toggle */
     .nav-toggle {
       display: none;
       background: none;
@@ -221,16 +155,13 @@
 
     .nav-toggle span {
       display: block;
-      width: 24px;
-      height: 2px;
+      width: 24px; height: 2px;
       background: var(--text-primary);
       margin: 5px 0;
       transition: 0.3s;
     }
 
-    /* ========================================
-       HERO SECTION
-       ======================================== */
+    /* ======== HERO ======== */
     .hero {
       min-height: 100vh;
       display: flex;
@@ -240,14 +171,11 @@
       padding-top: var(--nav-height);
     }
 
-    /* Gradient background orbs */
     .hero::before {
       content: '';
       position: absolute;
-      top: -50%;
-      right: -20%;
-      width: 800px;
-      height: 800px;
+      top: -50%; right: -20%;
+      width: 800px; height: 800px;
       background: radial-gradient(circle, var(--navy-dim) 0%, transparent 70%);
       pointer-events: none;
       animation: orbFloat 15s ease-in-out infinite;
@@ -256,10 +184,8 @@
     .hero::after {
       content: '';
       position: absolute;
-      bottom: -30%;
-      left: -10%;
-      width: 600px;
-      height: 600px;
+      bottom: -30%; left: -10%;
+      width: 600px; height: 600px;
       background: radial-gradient(circle, var(--accent-main-dim) 0%, transparent 70%);
       pointer-events: none;
       animation: orbFloat 12s ease-in-out infinite reverse;
@@ -288,18 +214,11 @@
       50% { opacity: 0.5; }
     }
 
-    /* Floating particles container */
-    .hero-particles {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      overflow: hidden;
-    }
+    .hero-particles { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
 
     .particle {
       position: absolute;
-      width: 3px;
-      height: 3px;
+      width: 3px; height: 3px;
       background: var(--accent-main);
       border-radius: 50%;
       opacity: 0;
@@ -307,30 +226,13 @@
     }
 
     @keyframes particleFloat {
-      0% {
-        opacity: 0;
-        transform: translateY(100vh) scale(0);
-      }
-      10% {
-        opacity: 0.6;
-        transform: translateY(90vh) scale(1);
-      }
-      90% {
-        opacity: 0.3;
-      }
-      100% {
-        opacity: 0;
-        transform: translateY(-10vh) scale(0.5);
-      }
+      0% { opacity: 0; transform: translateY(100vh) scale(0); }
+      10% { opacity: 0.6; transform: translateY(90vh) scale(1); }
+      90% { opacity: 0.3; }
+      100% { opacity: 0; transform: translateY(-10vh) scale(0.5); }
     }
 
-    /* Geometric floating shapes */
-    .hero-shapes {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      overflow: hidden;
-    }
+    .hero-shapes { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
 
     .geo-shape {
       position: absolute;
@@ -338,35 +240,9 @@
       animation: shapeDrift 20s ease-in-out infinite;
     }
 
-    .geo-shape:nth-child(1) {
-      width: 80px;
-      height: 80px;
-      top: 15%;
-      right: 10%;
-      transform: rotate(45deg);
-      animation-delay: 0s;
-    }
-
-    .geo-shape:nth-child(2) {
-      width: 120px;
-      height: 120px;
-      bottom: 20%;
-      right: 25%;
-      border-radius: 50%;
-      border-color: rgba(188, 164, 101, 0.08);
-      animation-delay: -5s;
-      animation-duration: 25s;
-    }
-
-    .geo-shape:nth-child(3) {
-      width: 60px;
-      height: 60px;
-      top: 40%;
-      right: 35%;
-      transform: rotate(30deg);
-      border-color: rgba(33, 64, 154, 0.12);
-      animation-delay: -10s;
-    }
+    .geo-shape:nth-child(1) { width: 80px; height: 80px; top: 15%; right: 10%; transform: rotate(45deg); animation-delay: 0s; }
+    .geo-shape:nth-child(2) { width: 120px; height: 120px; bottom: 20%; right: 25%; border-radius: 50%; border-color: rgba(188, 164, 101, 0.08); animation-delay: -5s; animation-duration: 25s; }
+    .geo-shape:nth-child(3) { width: 60px; height: 60px; top: 40%; right: 35%; transform: rotate(30deg); border-color: rgba(33, 64, 154, 0.12); animation-delay: -10s; }
 
     @keyframes shapeDrift {
       0%, 100% { transform: rotate(0deg) translate(0, 0); }
@@ -399,14 +275,8 @@
     }
 
     @keyframes tagSlideIn {
-      from {
-        opacity: 0;
-        transform: translateX(-20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
+      from { opacity: 0; transform: translateX(-20px); }
+      to { opacity: 1; transform: translateX(0); }
     }
 
     .hero h1 {
@@ -420,16 +290,8 @@
     }
 
     @keyframes heroTitleIn {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-        filter: blur(8px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-        filter: blur(0);
-      }
+      from { opacity: 0; transform: translateY(30px); filter: blur(8px); }
+      to { opacity: 1; transform: translateY(0); filter: blur(0); }
     }
 
     .hero h1 em {
@@ -457,14 +319,8 @@
     }
 
     @keyframes heroDescIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .hero-buttons {
@@ -476,17 +332,10 @@
     }
 
     @keyframes heroButtonsIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Scroll indicator */
     .scroll-indicator {
       display: flex;
       flex-direction: column;
@@ -504,8 +353,7 @@
     }
 
     .scroll-indicator .scroll-line {
-      width: 1px;
-      height: 40px;
+      width: 1px; height: 40px;
       background: linear-gradient(to bottom, var(--accent-main), transparent);
       animation: scrollLine 2s ease-in-out infinite;
     }
@@ -521,9 +369,7 @@
       100% { opacity: 1; transform: scaleY(1); }
     }
 
-    /* ========================================
-       BUTTONS
-       ======================================== */
+    /* ======== BUTTONS ======== */
     .btn {
       display: inline-flex;
       align-items: center;
@@ -541,41 +387,24 @@
       overflow: hidden;
     }
 
-    .btn-primary {
-      background: var(--accent-main);
-      color: var(--bg-primary);
-    }
-
+    .btn-primary { background: var(--accent-main); color: var(--bg-primary); }
     .btn-primary:hover {
       box-shadow: 0 0 40px rgba(30, 155, 216, 0.4), 0 0 80px rgba(30, 155, 216, 0.1);
-      color: var(--bg-primary);
-      opacity: 1;
-      transform: translateY(-2px);
+      color: var(--bg-primary); opacity: 1; transform: translateY(-2px);
     }
 
-    .btn-outline {
-      background: transparent;
-      color: var(--text-primary);
-      border: 1px solid var(--border-color);
-    }
-
+    .btn-outline { background: transparent; color: var(--text-primary); border: 1px solid var(--border-color); }
     .btn-outline:hover {
-      border-color: var(--accent-main);
-      color: var(--accent-main);
-      opacity: 1;
-      box-shadow: 0 0 30px rgba(30, 155, 216, 0.1);
-      transform: translateY(-2px);
+      border-color: var(--accent-main); color: var(--accent-main);
+      opacity: 1; box-shadow: 0 0 30px rgba(30, 155, 216, 0.1); transform: translateY(-2px);
     }
 
-    /* ========================================
-       STATS BAR
-       ======================================== */
+    /* ======== STATS BAR ======== */
     .stats-bar {
       background: var(--bg-secondary);
       border-top: 1px solid var(--border-color);
       border-bottom: 1px solid var(--border-color);
       padding: 48px 0;
-      position: relative;
     }
 
     .stats-grid {
@@ -585,24 +414,18 @@
       text-align: center;
     }
 
-    .stat-item {
-      position: relative;
-    }
+    .stat-item { position: relative; }
 
     .stat-item::after {
       content: '';
       position: absolute;
-      right: 0;
-      top: 50%;
+      right: 0; top: 50%;
       transform: translateY(-50%);
-      width: 1px;
-      height: 40px;
+      width: 1px; height: 40px;
       background: linear-gradient(to bottom, transparent, var(--border-color), transparent);
     }
 
-    .stat-item:last-child::after {
-      display: none;
-    }
+    .stat-item:last-child::after { display: none; }
 
     .stat-item h3 {
       font-family: var(--font-display);
@@ -611,12 +434,9 @@
       color: var(--accent-main);
       line-height: 1;
       margin-bottom: 8px;
-      transition: color 0.3s;
     }
 
-    .stat-item:hover h3 {
-      text-shadow: 0 0 30px rgba(30, 155, 216, 0.5);
-    }
+    .stat-item:hover h3 { text-shadow: 0 0 30px rgba(30, 155, 216, 0.5); }
 
     .stat-item p {
       font-size: 0.8rem;
@@ -625,598 +445,21 @@
       color: var(--accent-gold);
     }
 
-    /* ========================================
-       SECTION SHARED STYLES
-       ======================================== */
-    .section {
-      padding: var(--section-padding) 0;
-    }
-
-    .section-header {
-      margin-bottom: 64px;
-    }
-
-    .section-label {
-      font-family: var(--font-display);
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      color: var(--accent-gold);
-      margin-bottom: 16px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .section-label::before {
-      content: '';
-      width: 30px;
-      height: 1px;
-      background: var(--accent-gold);
-    }
-
-    .section-title {
-      font-family: var(--font-display);
-      font-size: clamp(1.75rem, 4vw, 2.75rem);
-      font-weight: 700;
-      line-height: 1.15;
-      margin-bottom: 16px;
-    }
-
-    .section-subtitle {
-      font-size: 1.05rem;
-      color: var(--text-secondary);
-      max-width: 600px;
-      font-weight: 300;
-    }
-
-    /* ========================================
-       ABOUT SECTION
-       ======================================== */
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 64px;
-      align-items: center;
-    }
-
-    .about-image {
-      aspect-ratio: 4/3;
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--text-muted);
-      font-size: 0.85rem;
-      position: relative;
-      overflow: hidden;
-      transition: border-color 0.5s, transform 0.5s;
-    }
-
-    .about-image:hover {
-      border-color: var(--accent-main);
-      transform: scale(1.02);
-    }
-
-
-    .about-image::after {
-      content: '';
-      position: absolute;
-      inset: -1px;
-      background: linear-gradient(135deg, var(--accent-main), var(--navy), var(--accent-gold));
-      z-index: -1;
+    /* ======== REVEAL ======== */
+    .reveal-stagger > * {
       opacity: 0;
-      transition: opacity 0.5s;
-      border-radius: inherit;
+      transform: translateY(25px);
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .about-image:hover::after {
-      opacity: 0.3;
-    }
-
-    .about-text p {
-      color: var(--text-secondary);
-      margin-bottom: 20px;
-    }
-
-    .about-text p:first-of-type {
-      font-size: 1.1rem;
-    }
-
-    /* ========================================
-       TEAMS SECTION
-       ======================================== */
-    .teams-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 32px;
-    }
-
-    .team-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      padding: 48px 40px;
-      position: relative;
-      overflow: hidden;
-      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
-    }
-
-    .team-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 100%;
-      background: linear-gradient(180deg, rgba(30, 155, 216, 0.03) 0%, transparent 50%);
-      opacity: 0;
-      transition: opacity 0.5s;
-    }
-
-    .team-card:hover::before {
-      opacity: 1;
-    }
-
-    .team-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-    }
-
-    .team-card--a { border-top: 3px solid var(--accent-team-a); }
-    .team-card--b { border-top: 3px solid #4a6fd4; }
-
-    .team-card--a:hover { border-color: var(--accent-team-a); box-shadow: 0 20px 60px rgba(30, 155, 216, 0.15); }
-    .team-card--b:hover { border-color: #4a6fd4; box-shadow: 0 20px 60px rgba(74, 111, 212, 0.15); }
-
-    .team-number {
-      font-family: var(--font-display);
-      font-size: 3.5rem;
-      font-weight: 700;
-      line-height: 1;
-      margin-bottom: 8px;
-      transition: text-shadow 0.3s;
-    }
-
-    .team-card:hover .team-number {
-      text-shadow: 0 0 40px currentColor;
-    }
-
-    .team-card--a .team-number { color: var(--accent-team-a); }
-    .team-card--b .team-number { color: #4a6fd4; }
-
-    .team-name {
-      font-family: var(--font-display);
-      font-size: 1.25rem;
-      font-weight: 600;
-      margin-bottom: 20px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .team-description {
-      color: var(--text-secondary);
-      margin-bottom: 28px;
-      font-size: 0.95rem;
-      position: relative;
-    }
-
-    .team-robot {
-      background: var(--bg-primary);
-      border: 1px solid var(--border-color);
-      aspect-ratio: 16/10;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--text-muted);
-      font-size: 0.8rem;
-      margin-bottom: 24px;
-      position: relative;
-      overflow: hidden;
-      transition: border-color 0.3s;
-    }
-
-    .team-card:hover .team-robot {
-      border-color: var(--border-glow);
-    }
-
-    .team-specs {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      position: relative;
-    }
-
-    .spec-item {
-      padding: 12px 16px;
-      background: var(--bg-primary);
-      border: 1px solid var(--border-color);
-      transition: border-color 0.3s, transform 0.3s;
-    }
-
-    .spec-item:hover {
-      border-color: rgba(30, 155, 216, 0.2);
-      transform: translateY(-2px);
-    }
-
-    .spec-label {
-      font-size: 0.65rem;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      color: var(--accent-gold);
-      margin-bottom: 4px;
-    }
-
-    .spec-value {
-      font-family: var(--font-display);
-      font-weight: 600;
-      font-size: 0.95rem;
-    }
-
-    /* ========================================
-       ACHIEVEMENTS SECTION
-       ======================================== */
-    .achievements-section {
-      background: var(--bg-secondary);
-    }
-
-    .timeline {
-      position: relative;
-      padding-left: 40px;
-    }
-
-    .timeline::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 2px;
-      background: linear-gradient(to bottom, var(--accent-main), var(--border-color), var(--accent-main));
-      background-size: 100% 200%;
-      animation: timelineGradient 4s ease-in-out infinite;
-    }
-
-    @keyframes timelineGradient {
-      0%, 100% { background-position: 0% 0%; }
-      50% { background-position: 0% 100%; }
-    }
-
-    .timeline-item {
-      position: relative;
-      padding-bottom: 48px;
-      transition: transform 0.3s;
-    }
-
-    .timeline-item:hover {
-      transform: translateX(8px);
-    }
-
-    .timeline-item:last-child {
-      padding-bottom: 0;
-    }
-
-    .timeline-item::before {
-      content: '';
-      position: absolute;
-      left: -44px;
-      top: 6px;
-      width: 10px;
-      height: 10px;
-      background: var(--accent-main);
-      border-radius: 50%;
-      box-shadow: 0 0 12px var(--accent-main-dim);
-      transition: box-shadow 0.3s, transform 0.3s;
-    }
-
-    .timeline-item:hover::before {
-      box-shadow: 0 0 20px rgba(30, 155, 216, 0.5);
-      transform: scale(1.3);
-    }
-
-    /* Pulsing ring on timeline dots */
-    .timeline-item::after {
-      content: '';
-      position: absolute;
-      left: -48px;
-      top: 2px;
-      width: 18px;
-      height: 18px;
-      border: 1px solid var(--accent-main);
-      border-radius: 50%;
-      opacity: 0;
-      animation: timelinePulse 3s ease-in-out infinite;
-    }
-
-    .timeline-item:nth-child(1)::after { animation-delay: 0s; }
-    .timeline-item:nth-child(2)::after { animation-delay: 0.5s; }
-    .timeline-item:nth-child(3)::after { animation-delay: 1s; }
-    .timeline-item:nth-child(4)::after { animation-delay: 1.5s; }
-    .timeline-item:nth-child(5)::after { animation-delay: 2s; }
-    .timeline-item:nth-child(6)::after { animation-delay: 2.5s; }
-    .timeline-item:nth-child(7)::after { animation-delay: 3s; }
-
-    @keyframes timelinePulse {
-      0%, 100% { opacity: 0; transform: scale(0.8); }
-      50% { opacity: 0.5; transform: scale(1.5); }
-    }
-
-    .timeline-year {
-      font-family: var(--font-display);
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 3px;
-      color: var(--accent-gold);
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
-
-    .timeline-title {
-      font-family: var(--font-display);
-      font-size: 1.25rem;
-      font-weight: 600;
-      margin-bottom: 8px;
-    }
-
-    .timeline-desc {
-      color: var(--text-secondary);
-      font-size: 0.95rem;
-    }
+    .reveal-stagger.visible > *:nth-child(1) { transition-delay: 0s; }
+    .reveal-stagger.visible > *:nth-child(2) { transition-delay: 0.1s; }
+    .reveal-stagger.visible > *:nth-child(3) { transition-delay: 0.2s; }
+    .reveal-stagger.visible > *:nth-child(4) { transition-delay: 0.3s; }
 
-    /* ========================================
-       SPONSORS SECTION
-       ======================================== */
-    .sponsor-tiers {
-      display: flex;
-      flex-direction: column;
-      gap: 48px;
-    }
-
-    .sponsor-tier h3 {
-      font-family: var(--font-display);
-      font-size: 1rem;
-      font-weight: 600;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--accent-gold);
-      margin-bottom: 24px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid rgba(188, 164, 101, 0.15);
-    }
-
-    .sponsor-logos {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 24px;
-      justify-content: center;
-      align-items: stretch;
-    }
-
-    .sponsor-card {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 28px 48px;
-      border-radius: 12px;
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-
-    .sponsor-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-    }
-
-    .sponsor-card img {
-      max-height: 50px;
-      max-width: 180px;
-      object-fit: contain;
-    }
-
-    .sponsor-card--fabworks {
-      background: #122a52;
-      flex-direction: column;
-      gap: 16px;
-      padding: 36px 48px;
-      max-width: 400px;
-    }
-
-    .sponsor-card--fabworks .fw-icon-box {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .sponsor-card--fabworks .fw-icon-box img {
-      width: 60px;
-      height: 60px;
-    }
-
-    .sponsor-card--fabworks .sponsor-name {
-      color: #ffffff;
-      font-family: var(--font-display);
-      font-size: 1.4rem;
-      font-weight: 700;
-      letter-spacing: -0.5px;
-    }
-
-    .sponsor-card--fabworks .sponsor-blurb {
-      color: rgba(255, 255, 255, 0.7);
-      font-size: 0.85rem;
-      line-height: 1.5;
-      text-align: center;
-      max-width: 300px;
-    }
-
-    .sponsor-cta {
-      margin-top: 48px;
-      padding: 40px;
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 24px;
-      position: relative;
-      overflow: hidden;
-      transition: border-color 0.3s;
-    }
-
-    .sponsor-cta::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(30, 155, 216, 0.03), transparent, rgba(188, 164, 101, 0.03));
-      pointer-events: none;
-    }
-
-    .sponsor-cta:hover {
-      border-color: var(--border-glow);
-    }
-
-    .sponsor-cta-text h3 {
-      font-family: var(--font-display);
-      font-size: 1.5rem;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-
-    .sponsor-cta-text p {
-      color: var(--text-secondary);
-    }
-
-    /* ========================================
-       JOIN SECTION
-       ======================================== */
-    .join-section {
-      background: var(--bg-secondary);
-    }
-
-    /* Roles Marquee */
-    .roles-marquee {
-      margin-bottom: 48px;
-      position: relative;
-      overflow: hidden;
-      padding: 8px 0;
-    }
-
-    .roles-marquee::before,
-    .roles-marquee::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      width: 150px;
-      z-index: 2;
-      pointer-events: none;
-    }
-
-    .roles-marquee::before {
-      left: 0;
-      background: linear-gradient(to right, var(--bg-secondary), transparent);
-    }
-
-    .roles-marquee::after {
-      right: 0;
-      background: linear-gradient(to left, var(--bg-secondary), transparent);
-    }
-
-    .marquee-track {
-      display: flex;
-      gap: 20px;
-      animation: marquee-scroll 35s linear infinite;
-    }
-
-    .marquee-track:hover {
-      animation-play-state: paused;
-    }
-
-    @keyframes marquee-scroll {
-      from { transform: translateX(0); }
-      to { transform: translateX(calc(-50% - 10px)); }
-    }
-
-    .role-card {
-      flex-shrink: 0;
-      width: 300px;
-      padding: 28px 24px;
-      background: linear-gradient(to bottom, var(--bg-card), rgba(20, 28, 48, 0.5));
-      border: 1px solid var(--border-color);
-      border-top: 2px solid transparent;
-      border-image: linear-gradient(90deg, var(--accent-main), var(--accent-gold)) 1;
-      border-image-slice: 1 0 0 0;
-      border-radius: 0;
-      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
-      position: relative;
-    }
-
-    .role-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
-    }
-
-    .role-icon {
-      font-size: 2rem;
-      margin-bottom: 14px;
-    }
-
-    .role-card h3 {
-      font-family: var(--font-display);
-      font-size: 1.05rem;
-      font-weight: 600;
-      margin-bottom: 10px;
-    }
-
-    .role-card p {
-      color: var(--text-secondary);
-      font-size: 0.85rem;
-      line-height: 1.55;
-    }
-
-    .join-cta {
-      text-align: center;
-      padding: 48px;
-      border: 1px dashed var(--border-glow);
-      background: var(--accent-main-dim);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .join-cta::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 50% 50%, rgba(30, 155, 216, 0.08), transparent 70%);
-      animation: ctaPulse 4s ease-in-out infinite;
-    }
-
-    @keyframes ctaPulse {
-      0%, 100% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.5); opacity: 0; }
-    }
-
-    .join-cta h3 {
-      font-family: var(--font-display);
-      font-size: 1.75rem;
-      font-weight: 700;
-      margin-bottom: 12px;
-      position: relative;
-    }
-
-    .join-cta p {
-      color: var(--text-secondary);
-      margin-bottom: 24px;
-      position: relative;
-    }
-
-    .join-cta .btn {
-      position: relative;
-    }
+    .reveal-stagger.visible > * { opacity: 1; transform: translateY(0); }
 
-    /* ========================================
-       CONTACT / FOOTER
-       ======================================== */
+    /* ======== FOOTER ======== */
     .footer {
       border-top: 1px solid var(--border-color);
       padding: 64px 0 40px;
@@ -1246,12 +489,7 @@
       margin-bottom: 20px;
     }
 
-    .footer ul {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
+    .footer ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
 
     .footer ul a {
       color: var(--text-secondary);
@@ -1260,11 +498,7 @@
       display: inline-block;
     }
 
-    .footer ul a:hover {
-      color: var(--text-primary);
-      opacity: 1;
-      transform: translateX(4px);
-    }
+    .footer ul a:hover { color: var(--text-primary); opacity: 1; transform: translateX(4px); }
 
     .footer-bottom {
       padding-top: 32px;
@@ -1276,10 +510,7 @@
       color: var(--text-muted);
     }
 
-    .social-links {
-      display: flex;
-      gap: 16px;
-    }
+    .social-links { display: flex; gap: 16px; }
 
     .social-links a {
       color: var(--text-muted);
@@ -1287,71 +518,11 @@
       display: inline-block;
     }
 
-    .social-links a:hover {
-      color: var(--accent-main);
-      opacity: 1;
-      transform: translateY(-2px);
-    }
+    .social-links a:hover { color: var(--accent-main); opacity: 1; transform: translateY(-2px); }
 
-    /* ========================================
-       SCROLL ANIMATIONS
-       ======================================== */
-    .reveal {
-      opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* Staggered children */
-    .reveal-stagger > * {
-      opacity: 0;
-      transform: translateY(25px);
-      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .reveal-stagger.visible > *:nth-child(1) { transition-delay: 0s; }
-    .reveal-stagger.visible > *:nth-child(2) { transition-delay: 0.1s; }
-    .reveal-stagger.visible > *:nth-child(3) { transition-delay: 0.2s; }
-    .reveal-stagger.visible > *:nth-child(4) { transition-delay: 0.3s; }
-    .reveal-stagger.visible > *:nth-child(5) { transition-delay: 0.4s; }
-    .reveal-stagger.visible > *:nth-child(6) { transition-delay: 0.5s; }
-
-    .reveal-stagger.visible > * {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* Reveal from left/right */
-    .reveal-left {
-      opacity: 0;
-      transform: translateX(-40px);
-      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .reveal-right {
-      opacity: 0;
-      transform: translateX(40px);
-      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .reveal-left.visible,
-    .reveal-right.visible {
-      opacity: 1;
-      transform: translateX(0);
-    }
-
-    /* ========================================
-       RESPONSIVE
-       ======================================== */
+    /* ======== RESPONSIVE ======== */
     @media (max-width: 768px) {
-      :root {
-        --section-padding: 64px;
-      }
+      :root { --section-padding: 64px; }
 
       .nav-links { display: none; }
       .nav-toggle { display: block; }
@@ -1361,8 +532,7 @@
         flex-direction: column;
         position: absolute;
         top: var(--nav-height);
-        left: 0;
-        right: 0;
+        left: 0; right: 0;
         background: rgba(11, 15, 26, 0.97);
         backdrop-filter: blur(16px);
         padding: 24px;
@@ -1372,73 +542,35 @@
 
       .hero h1 { font-size: 2.25rem; }
 
-      .stats-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 24px;
-      }
+      .stats-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
+      .stat-item::after { display: none; }
 
-      .stat-item::after {
-        display: none;
-      }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
 
-      .about-grid {
-        grid-template-columns: 1fr;
-        gap: 32px;
-      }
-
-      .teams-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .roles-marquee::before,
-      .roles-marquee::after {
-        width: 60px;
-      }
-
-      .footer-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 32px;
-      }
-
-      .sponsor-cta {
-        flex-direction: column;
-        text-align: center;
-      }
-
-      .scroll-indicator {
-        display: none;
-      }
-
-      .cursor-glow {
-        display: none;
-      }
+      .scroll-indicator { display: none; }
+      .cursor-glow { display: none; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Cursor following glow -->
   <div class="cursor-glow" id="cursorGlow"></div>
 
-  <!-- ==================== NAVIGATION ==================== -->
   <nav class="nav" id="mainNav">
     <div class="container">
-      <a href="#" class="nav-logo">
-        <!-- TODO: Replace with your school/program name -->
-        <span>[</span>ROBOTICS<span>]</span>
-      </a>
+      <a href="index.html" class="nav-logo"><span>[</span>ROBOTICS<span>]</span></a>
 
       <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Toggle menu">
         <span></span><span></span><span></span>
       </button>
 
       <ul class="nav-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#teams">Teams</a></li>
-        <li><a href="#what-we-do">What We Do</a></li>
-        <li><a href="#achievements">Achievements</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="teams.html">Teams</a></li>
+        <li><a href="what-we-do.html">What We Do</a></li>
+        <li><a href="achievements.html">Achievements</a></li>
         <li><a href="gallery.html">Gallery</a></li>
-        <li><a href="#sponsors" class="nav-cta">Become a Sponsor</a></li>
+        <li><a href="sponsors.html" class="nav-cta">Become a Sponsor</a></li>
       </ul>
     </div>
   </nav>
@@ -1460,8 +592,8 @@
           We're two FRC teams from Santa Margarita Catholic High School united by a passion for engineering, innovation, and competition. Your sponsorship helps students design, build, and program robots that push limits.
         </p>
         <div class="hero-buttons">
-          <a href="#sponsors" class="btn btn-primary">Become a Sponsor →</a>
-          <a href="#what-we-do" class="btn btn-outline">See What We Do</a>
+          <a href="sponsors.html" class="btn btn-primary">Become a Sponsor →</a>
+          <a href="what-we-do.html" class="btn btn-outline">See What We Do</a>
         </div>
         <div class="scroll-indicator">
           <span>Scroll</span>
@@ -1495,330 +627,29 @@
     </div>
   </section>
 
-  <!-- ==================== ABOUT ==================== -->
-  <section class="section" id="about">
-    <div class="container">
-      <div class="about-grid">
-        <div class="about-text reveal-left">
-          <div class="section-header">
-            <p class="section-label">About Us</p>
-            <h2 class="section-title">More Than Just Robots</h2>
-          </div>
-          <p>
-            <!-- TODO: Replace with your story -->
-            Our robotics program at Santa Margarita Catholic High School in Rancho Santa Margarita, California is about more than building machines — it's about building skills, confidence, and community. With two competitive FRC teams under one roof, we offer students a place to discover engineering, programming, design, and leadership.
-          </p>
-          <p>
-            Whether you're into CAD, coding, machining, or marketing — there's a role for you. Our teams work side by side, sharing knowledge and resources while competing independently on the field.
-          </p>
-        </div>
-        <div class="about-image reveal-right">
-          <img src="imgs/DSCF2282.jpg" alt="Team 5805 at competition" style="width:100%;height:100%;object-fit:cover;display:block;">
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== TEAMS ==================== -->
-  <section class="section" id="teams">
-    <div class="container">
-      <div class="section-header reveal">
-        <p class="section-label">Our Teams</p>
-        <h2 class="section-title">Two Teams, One Mission</h2>
-        <p class="section-subtitle">
-          Each team designs, builds, and competes independently — but we share a shop, mentors, and a drive to win.
-        </p>
-      </div>
-
-      <div class="teams-grid">
-        <!-- TEAM 3020 -->
-        <div class="team-card team-card--a reveal-left">
-          <div class="team-number">3020</div>
-          <div class="team-name">SMbld</div>
-          <p class="team-description">
-            Competing since 2009, SMbld is the founding FRC team of Santa Margarita Catholic High School's robotics program. With over 15 seasons of experience, the team earned the prestigious Rookie All Star Award in their very first year and has been a consistent competitor in the FIRST California District.
-          </p>
-          <div class="team-robot">
-            [ 2026 Robot Photo ]
-          </div>
-          <div class="team-specs">
-            <div class="spec-item">
-              <div class="spec-label">Founded</div>
-              <div class="spec-value">2009</div>
-            </div>
-            <div class="spec-item">
-              <div class="spec-label">District</div>
-              <div class="spec-value">CA FRC</div>
-            </div>
-            <div class="spec-item">
-              <div class="spec-label">Latest Season</div>
-              <div class="spec-value">2026</div>
-            </div>
-            <div class="spec-item">
-              <div class="spec-label">Best Finish</div>
-              <div class="spec-value">Regional Finalist</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- TEAM 5805 -->
-        <div class="team-card team-card--b reveal-right">
-          <div class="team-number">5805</div>
-          <div class="team-name">SMbly Required</div>
-          <p class="team-description">
-            Since their rookie year in 2016, SMbly Required has rapidly risen in the FRC community. They earned the Rookie All Star Award and Highest Rookie Seed in their debut season, won the 2018 Orange County Regional, and captured the 2025 Ventura County Regional title. Currently ranked #47 in the California District.
-          </p>
-          <div class="team-robot">
-            [ 2026 Robot Photo ]
-          </div>
-          <div class="team-specs">
-            <div class="spec-item">
-              <div class="spec-label">Founded</div>
-              <div class="spec-value">2016</div>
-            </div>
-            <div class="spec-item">
-              <div class="spec-label">District Rank</div>
-              <div class="spec-value">#47 CA</div>
-            </div>
-            <div class="spec-item">
-              <div class="spec-label">Latest Season</div>
-              <div class="spec-value">2026</div>
-            </div>
-            <div class="spec-item">
-              <div class="spec-label">Best Finish</div>
-              <div class="spec-value">Regional Winner</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== ACHIEVEMENTS ==================== -->
-  <section class="section achievements-section" id="achievements">
-    <div class="container">
-      <div class="section-header reveal">
-        <p class="section-label">Achievements</p>
-        <h2 class="section-title">Our Track Record</h2>
-        <p class="section-subtitle">
-          From regional wins to community impact — here's what we've accomplished.
-        </p>
-      </div>
-
-      <div class="timeline reveal">
-        <div class="timeline-item">
-          <div class="timeline-year">2026 Season</div>
-          <h3 class="timeline-title">5805 — District Event Finalist</h3>
-          <p class="timeline-desc">SMbly Required advanced to the playoff finals at the CA District Hueneme Port Event, losing a nail-biter championship match by a single point (169–170). Currently ranked #47 in the California District.</p>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-year">2025 Season</div>
-          <h3 class="timeline-title">5805 — Regional Winners &amp; Beach Blitz Champions</h3>
-          <p class="timeline-desc">SMbly Required had a breakout year — winning both the Ventura County Regional and the Beach Blitz off-season event, and reaching the finals of the SoCal Showdown.</p>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-year">2022 Season</div>
-          <h3 class="timeline-title">3020 — Orange County Regional Finalist</h3>
-          <p class="timeline-desc">SMbld made a strong post-COVID return, advancing to the finals at the Orange County Regional.</p>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-year">2019 Season</div>
-          <h3 class="timeline-title">5805 — Regional Finalist &amp; World Championship</h3>
-          <p class="timeline-desc">SMbly Required earned a Regional Finalist award and Wildcard at the Orange County Regional, punching their ticket to the FIRST Championship on the Turing Division.</p>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-year">2018 Season</div>
-          <h3 class="timeline-title">5805 — Orange County Regional Winners</h3>
-          <p class="timeline-desc">In just their third season, SMbly Required won the Orange County Regional and competed at the FIRST Championship on the Carver Division.</p>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-year">2016 Season</div>
-          <h3 class="timeline-title">5805 — Rookie All Star &amp; Highest Rookie Seed</h3>
-          <p class="timeline-desc">SMbly Required burst onto the scene in their debut year, earning both the Rookie All Star Award and the Highest Rookie Seed at the San Diego Regional, then competing at the FIRST Championship.</p>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-year">2009 Season</div>
-          <h3 class="timeline-title">3020 — Rookie All Star Award</h3>
-          <p class="timeline-desc">SMbld launched the robotics program at Santa Margarita Catholic High School, earning the prestigious Rookie All Star Award at the Los Angeles Regional in their inaugural season.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== SPONSORS ==================== -->
-  <section class="section" id="sponsors">
-    <div class="container">
-      <div class="section-header reveal">
-        <p class="section-label">Our Sponsors</p>
-        <h2 class="section-title">Powered By Our Partners</h2>
-        <p class="section-subtitle">
-          Our sponsors make it possible for students to design, build, and compete. We're grateful for their support.
-        </p>
-      </div>
-
-      <div class="sponsor-tiers reveal">
-        <div class="sponsor-tier">
-          <h3>Made Possible By</h3>
-          <div class="sponsor-logos">
-            <div class="sponsor-card sponsor-card--fabworks">
-              <div class="fw-icon-box"><img src="fw-icon.svg" alt="Fabworks"></div>
-              <span class="sponsor-name">fabworks.</span>
-              <p class="sponsor-blurb">Ventura, CA-based laser cutting and sheet metal fabrication — rapid manufacturing with industry-leading turnaround times.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="sponsor-cta reveal">
-        <div class="sponsor-cta-text">
-          <h3>Interested in Sponsoring?</h3>
-          <p>Your support fuels STEM education and gives students real-world engineering experience.</p>
-        </div>
-        <!-- TODO: Link to your sponsor packet PDF or contact form -->
-        <a href="mailto:your@email.com" class="btn btn-primary">Get In Touch →</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== WHAT WE DO ==================== -->
-  <section class="section join-section" id="what-we-do">
-    <div class="container">
-      <div class="section-header reveal">
-        <p class="section-label">What We Do</p>
-        <h2 class="section-title">Where Your Support Goes</h2>
-        <p class="section-subtitle">
-          Your sponsorship fuels every aspect of our program — from engineering and fabrication to community impact.
-        </p>
-      </div>
-
-      <div class="roles-marquee reveal">
-        <div class="marquee-track">
-          <!-- Set 1 -->
-          <div class="role-card">
-            <div class="role-icon">⚙️</div>
-            <h3>Mechanical Engineering</h3>
-            <p>Students design and fabricate the robot's structure, mechanisms, and drivetrain using industry-standard tools, CNC machining, and hands-on building.</p>
-          </div>
-          <div class="role-card">
-            <div class="role-icon">💻</div>
-            <h3>Software & Autonomous</h3>
-            <p>Teams write code in Java and Python for autonomous routines, driver controls, computer vision, and sensor integration — real-world programming experience.</p>
-          </div>
-          <div class="role-card">
-            <div class="role-icon">🔌</div>
-            <h3>Electrical Systems</h3>
-            <p>Wiring, power distribution, motor controllers, and sensor integration. Students learn circuit design and troubleshooting on complex robotic systems.</p>
-          </div>
-          <div class="role-card">
-            <div class="role-icon">🎨</div>
-            <h3>3D Design & CAD</h3>
-            <p>Students create detailed 3D models and technical drawings in SolidWorks and Onshape, turning concepts into manufacturing-ready plans.</p>
-          </div>
-          <div class="role-card">
-            <div class="role-icon">🏭</div>
-            <h3>Fabrication & Prototyping</h3>
-            <p>From 3D printing to CNC routing and metal work, students gain hands-on manufacturing skills building functional robot components.</p>
-          </div>
-          <div class="role-card">
-            <div class="role-icon">🧪</div>
-            <h3>Testing & Strategy</h3>
-            <p>Rigorous testing cycles, match strategy analysis, and data-driven scouting teach students the scientific method and critical thinking.</p>
-          </div>
-          <div class="role-card">
-            <div class="role-icon">📢</div>
-            <h3>Business & Marketing</h3>
-            <p>Students manage budgets, write grant proposals, build brand identity, and run social media — real business skills for real-world applications.</p>
-          </div>
-          <div class="role-card">
-            <div class="role-icon">🎬</div>
-            <h3>Media & Documentation</h3>
-            <p>Photography, videography, and graphic design bring the season to life. Students produce content for social media, sponsor reports, and events.</p>
-          </div>
-          <div class="role-card">
-            <div class="role-icon">🤝</div>
-            <h3>Community Outreach</h3>
-            <p>STEM workshops, school demos, and mentoring younger teams. Our students give back and inspire the next generation of innovators.</p>
-          </div>
-          <!-- Duplicate set for seamless loop -->
-          <div class="role-card">
-            <div class="role-icon">⚙️</div>
-            <h3>Mechanical Engineering</h3>
-            <p>Students design and fabricate the robot's structure, mechanisms, and drivetrain using industry-standard tools, CNC machining, and hands-on building.</p>
-          </div>
-          <div class="role-card">
-            <div class="role-icon">💻</div>
-            <h3>Software & Autonomous</h3>
-            <p>Teams write code in Java and Python for autonomous routines, driver controls, computer vision, and sensor integration — real-world programming experience.</p>
-          </div>
-          <div class="role-card">
-            <div class="role-icon">🔌</div>
-            <h3>Electrical Systems</h3>
-            <p>Wiring, power distribution, motor controllers, and sensor integration. Students learn circuit design and troubleshooting on complex robotic systems.</p>
-          </div>
-          <div class="role-card">
-            <div class="role-icon">🎨</div>
-            <h3>3D Design & CAD</h3>
-            <p>Students create detailed 3D models and technical drawings in SolidWorks and Onshape, turning concepts into manufacturing-ready plans.</p>
-          </div>
-          <div class="role-card">
-            <div class="role-icon">🏭</div>
-            <h3>Fabrication & Prototyping</h3>
-            <p>From 3D printing to CNC routing and metal work, students gain hands-on manufacturing skills building functional robot components.</p>
-          </div>
-          <div class="role-card">
-            <div class="role-icon">🧪</div>
-            <h3>Testing & Strategy</h3>
-            <p>Rigorous testing cycles, match strategy analysis, and data-driven scouting teach students the scientific method and critical thinking.</p>
-          </div>
-          <div class="role-card">
-            <div class="role-icon">📢</div>
-            <h3>Business & Marketing</h3>
-            <p>Students manage budgets, write grant proposals, build brand identity, and run social media — real business skills for real-world applications.</p>
-          </div>
-          <div class="role-card">
-            <div class="role-icon">🎬</div>
-            <h3>Media & Documentation</h3>
-            <p>Photography, videography, and graphic design bring the season to life. Students produce content for social media, sponsor reports, and events.</p>
-          </div>
-          <div class="role-card">
-            <div class="role-icon">🤝</div>
-            <h3>Community Outreach</h3>
-            <p>STEM workshops, school demos, and mentoring younger teams. Our students give back and inspire the next generation of innovators.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="join-cta reveal">
-        <h3>Invest in the Next Generation</h3>
-        <p>Every dollar goes directly toward materials, tools, registration, and travel — empowering students to learn by doing.</p>
-        <a href="#sponsors" class="btn btn-primary">Sponsor Our Program →</a>
-      </div>
-    </div>
-  </section>
-
   <!-- ==================== FOOTER ==================== -->
-  <footer class="footer" id="contact">
+  <footer class="footer">
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <div class="nav-logo" style="font-size:1.1rem;">
-            <span>[</span>ROBOTICS<span>]</span>
+          <div class="nav-logo" style="font-size:1.1rem;font-family:var(--font-display);font-weight:700;text-transform:uppercase;letter-spacing:1px;">
+            <span style="color:var(--accent-main);">[</span>ROBOTICS<span style="color:var(--accent-main);">]</span>
           </div>
           <p>FRC Teams 3020 &amp; 5805 at Santa Margarita Catholic High School. Building robots, building futures.</p>
         </div>
         <div>
           <h4>Navigate</h4>
           <ul>
-            <li><a href="#about">About</a></li>
-            <li><a href="#teams">Teams</a></li>
-            <li><a href="#achievements">Achievements</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="teams.html">Teams</a></li>
+            <li><a href="achievements.html">Achievements</a></li>
           </ul>
         </div>
         <div>
           <h4>Sponsor</h4>
           <ul>
-            <li><a href="#what-we-do">What We Do</a></li>
-            <li><a href="#sponsors">Sponsor Us</a></li>
+            <li><a href="what-we-do.html">What We Do</a></li>
+            <li><a href="sponsors.html">Sponsor Us</a></li>
             <li><a href="mailto:your@email.com">Contact</a></li>
           </ul>
         </div>
@@ -1834,7 +665,6 @@
       <div class="footer-bottom">
         <span>&copy; 2026 SM Robotics Program. All rights reserved.</span>
         <div class="social-links">
-          <!-- TODO: Replace # with your social media links -->
           <a href="#" aria-label="Instagram">Instagram</a>
           <a href="#" aria-label="YouTube">YouTube</a>
           <a href="#" aria-label="GitHub">GitHub</a>
@@ -1843,43 +673,26 @@
     </div>
   </footer>
 
-  <!-- ==================== SCRIPTS ==================== -->
   <script>
-    // ---- Scroll reveal animation (enhanced with directional + stagger support) ----
-    const revealSelectors = '.reveal, .reveal-left, .reveal-right, .reveal-stagger';
-    const revealElements = document.querySelectorAll(revealSelectors);
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    // Reveal stagger
+    const revealElements = document.querySelectorAll('.reveal-stagger');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    revealElements.forEach(el => observer.observe(el));
 
-    revealElements.forEach(el => revealObserver.observe(el));
-
-    // ---- Close mobile nav on link click ----
+    // Nav
     document.querySelectorAll('.nav-links a').forEach(link => {
-      link.addEventListener('click', () => {
-        document.querySelector('.nav-links').classList.remove('open');
-      });
+      link.addEventListener('click', () => document.querySelector('.nav-links').classList.remove('open'));
     });
 
-    // ---- Nav scroll effect ----
     const nav = document.getElementById('mainNav');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 50);
-    }, { passive: true });
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 50), { passive: true });
 
-    // ---- Cursor glow ----
+    // Cursor glow
     const cursorGlow = document.getElementById('cursorGlow');
     let glowX = 0, glowY = 0, currentX = 0, currentY = 0;
-
-    document.addEventListener('mousemove', (e) => {
-      glowX = e.clientX;
-      glowY = e.clientY;
-    });
-
+    document.addEventListener('mousemove', e => { glowX = e.clientX; glowY = e.clientY; });
     function animateGlow() {
       currentX += (glowX - currentX) * 0.08;
       currentY += (glowY - currentY) * 0.08;
@@ -1889,75 +702,52 @@
     }
     animateGlow();
 
-    // ---- Animated stat counters ----
+    // Stat counters
     const statsGrid = document.getElementById('statsGrid');
-    let statsCounted = false;
-
-    const statsObserver = new IntersectionObserver((entries) => {
+    let counted = false;
+    new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        if (entry.isIntersecting && !statsCounted) {
-          statsCounted = true;
-          const counters = statsGrid.querySelectorAll('h3[data-target]');
-          counters.forEach(counter => {
+        if (entry.isIntersecting && !counted) {
+          counted = true;
+          statsGrid.querySelectorAll('h3[data-target]').forEach(counter => {
             const target = parseInt(counter.dataset.target);
             const suffix = counter.dataset.suffix || '';
-            const duration = 2000;
-            const startTime = performance.now();
-
-            function updateCounter(currentTime) {
-              const elapsed = currentTime - startTime;
-              const progress = Math.min(elapsed / duration, 1);
-              // Ease out cubic
-              const eased = 1 - Math.pow(1 - progress, 3);
-              const current = Math.round(eased * target);
-              counter.textContent = current + suffix;
-
-              if (progress < 1) {
-                requestAnimationFrame(updateCounter);
-              }
+            const start = performance.now();
+            function update(now) {
+              const p = Math.min((now - start) / 2000, 1);
+              const eased = 1 - Math.pow(1 - p, 3);
+              counter.textContent = Math.round(eased * target) + suffix;
+              if (p < 1) requestAnimationFrame(update);
             }
-            requestAnimationFrame(updateCounter);
+            requestAnimationFrame(update);
           });
         }
       });
-    }, { threshold: 0.3 });
+    }, { threshold: 0.3 }).observe(statsGrid);
 
-    statsObserver.observe(statsGrid);
-
-    // ---- Hero particles ----
+    // Particles
     const particlesContainer = document.getElementById('heroParticles');
-
     function createParticle() {
-      const particle = document.createElement('div');
-      particle.classList.add('particle');
-      particle.style.left = Math.random() * 100 + '%';
-      particle.style.animationDuration = (8 + Math.random() * 12) + 's';
-      particle.style.animationDelay = Math.random() * 5 + 's';
-      particle.style.width = particle.style.height = (2 + Math.random() * 3) + 'px';
-
-      // Vary colors between blue, gold, and white
+      const p = document.createElement('div');
+      p.classList.add('particle');
+      p.style.left = Math.random() * 100 + '%';
+      p.style.animationDuration = (8 + Math.random() * 12) + 's';
+      p.style.animationDelay = Math.random() * 5 + 's';
+      p.style.width = p.style.height = (2 + Math.random() * 3) + 'px';
       const colors = ['var(--accent-main)', 'var(--accent-gold)', 'rgba(255,255,255,0.5)'];
-      particle.style.background = colors[Math.floor(Math.random() * colors.length)];
-
-      particlesContainer.appendChild(particle);
-
-      // Clean up after animation
-      particle.addEventListener('animationend', () => particle.remove());
+      p.style.background = colors[Math.floor(Math.random() * colors.length)];
+      particlesContainer.appendChild(p);
+      p.addEventListener('animationend', () => p.remove());
     }
-
-    // Spawn particles periodically
-    for (let i = 0; i < 15; i++) {
-      setTimeout(createParticle, i * 300);
-    }
+    for (let i = 0; i < 15; i++) setTimeout(createParticle, i * 300);
     setInterval(createParticle, 800);
 
-    // ---- Smooth parallax on hero shapes ----
+    // Parallax shapes
     const shapes = document.querySelectorAll('.geo-shape');
     window.addEventListener('scroll', () => {
       const scrollY = window.scrollY;
       shapes.forEach((shape, i) => {
-        const speed = 0.03 + i * 0.02;
-        shape.style.transform = `translateY(${scrollY * speed}px) rotate(${scrollY * 0.02 * (i + 1)}deg)`;
+        shape.style.transform = `translateY(${scrollY * (0.03 + i * 0.02)}px) rotate(${scrollY * 0.02 * (i + 1)}deg)`;
       });
     }, { passive: true });
   </script>
