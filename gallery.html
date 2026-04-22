@@ -387,9 +387,9 @@
       background: linear-gradient(
         90deg,
         transparent 0%,
-        rgba(30, 155, 216, 0.07) 35%,
-        rgba(30, 155, 216, 0.15) 50%,
-        rgba(30, 155, 216, 0.07) 65%,
+        rgba(30, 155, 216, 0.12) 35%,
+        rgba(30, 155, 216, 0.28) 50%,
+        rgba(30, 155, 216, 0.12) 65%,
         transparent 100%
       );
       background-size: 300% 100%;
@@ -760,7 +760,7 @@
         const item = document.createElement('div');
         item.className = 'gallery-item img-skeleton';
         item.innerHTML = `
-          <img src="${photo.src}" alt="${photo.caption}" loading="lazy">
+          <img src="${photo.src}" alt="${photo.caption}">
           <div class="gallery-item-overlay">
             <div class="gallery-item-caption">${photo.caption}</div>
             <div class="gallery-item-tag ${tc.className}">${tc.label}</div>
