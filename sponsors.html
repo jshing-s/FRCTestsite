@@ -39,6 +39,31 @@
       pointer-events: none; z-index: 9999;
     }
 
+    body::after {
+      content: '';
+      position: fixed;
+      top: -30%; right: -15%;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(33, 64, 154, 0.09) 0%, transparent 65%);
+      pointer-events: none;
+      z-index: 0;
+      animation: ambientDrift 20s ease-in-out infinite;
+    }
+    .ambient-orb {
+      position: fixed;
+      bottom: -20%; left: -10%;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(30, 155, 216, 0.06) 0%, transparent 65%);
+      pointer-events: none;
+      z-index: 0;
+      animation: ambientDrift 15s ease-in-out infinite reverse;
+    }
+    @keyframes ambientDrift {
+      0%, 100% { transform: translate(0, 0); }
+      33%       { transform: translate(-40px, 30px); }
+      66%       { transform: translate(25px, -20px); }
+    }
+
     /* NAV */
     .nav { position: fixed; top: 0; left: 0; right: 0; height: var(--nav-height); background: rgba(11, 15, 26, 0.85); backdrop-filter: blur(20px) saturate(1.2); border-bottom: 1px solid var(--border-color); z-index: 1000; display: flex; align-items: center; transition: background 0.3s, box-shadow 0.3s; }
     .nav.scrolled { background: rgba(11, 15, 26, 0.95); box-shadow: 0 4px 30px rgba(0,0,0,0.3); }
@@ -61,14 +86,18 @@
 
     /* PAGE HEADER */
     .page-header { padding-top: calc(var(--nav-height) + 80px); padding-bottom: 64px; text-align: center; position: relative; overflow: hidden; }
-    .page-header::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 800px; height: 400px; background: radial-gradient(ellipse at 50% 0%, rgba(30, 155, 216, 0.07), transparent 70%); pointer-events: none; }
+    .page-header::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 800px; height: 500px; background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(30, 155, 216, 0.18) 0%, transparent 70%), radial-gradient(ellipse 40% 30% at 50% 0%, rgba(33, 64, 154, 0.12) 0%, transparent 50%); pointer-events: none; }
+    .page-header-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(33, 64, 154, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(33, 64, 154, 0.05) 1px, transparent 1px); background-size: 48px 48px; mask-image: radial-gradient(ellipse 70% 80% at 50% 0%, black 0%, transparent 100%); pointer-events: none; animation: gridPulse 10s ease-in-out infinite; }
+    @keyframes gridPulse { 0%, 100% { opacity: 0.7; } 50% { opacity: 0.3; } }
     .page-header-label { font-family: var(--font-display); font-size: 0.8rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--accent-gold); margin-bottom: 16px; display: flex; align-items: center; justify-content: center; gap: 12px; }
     .page-header-label::before, .page-header-label::after { content: ''; width: 30px; height: 1px; background: var(--accent-gold); }
     .page-header h1 { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700; letter-spacing: -1px; margin-bottom: 16px; }
     .page-header p { color: var(--text-secondary); font-size: 1.05rem; font-weight: 300; max-width: 500px; margin: 0 auto; }
+    .page-header h1 em { font-style: normal; background: linear-gradient(135deg, var(--accent-main), #4ecbff, var(--accent-main)); background-size: 200% 200%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: gradientShift 4s ease-in-out infinite; }
+    @keyframes gradientShift { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
 
     /* SPONSORS */
-    .sponsors-section { padding: 0 0 100px; }
+    .sponsors-section { padding: 48px 0 100px; background: var(--bg-secondary); position: relative; z-index: 1; }
 
     .sponsor-tiers { display: flex; flex-direction: column; gap: 48px; }
 
@@ -86,7 +115,7 @@
     .sponsor-card--fabworks .sponsor-name { color: #ffffff; font-family: var(--font-display); font-size: 1.4rem; font-weight: 700; letter-spacing: -0.5px; }
     .sponsor-card--fabworks .sponsor-blurb { color: rgba(255,255,255,0.7); font-size: 0.85rem; line-height: 1.5; text-align: center; max-width: 300px; }
 
-    .sponsor-cta { margin-top: 48px; padding: 40px; background: var(--bg-card); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 24px; position: relative; overflow: hidden; transition: border-color 0.3s; }
+    .sponsor-cta { margin-top: 48px; padding: 40px; background: linear-gradient(135deg, rgba(30,155,216,0.06) 0%, var(--bg-card) 40%, rgba(188,164,101,0.04) 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), 0 8px 40px rgba(0,0,0,0.25); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 24px; position: relative; overflow: hidden; transition: border-color 0.3s; }
     .sponsor-cta::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(30, 155, 216, 0.03), transparent, rgba(188, 164, 101, 0.03)); pointer-events: none; }
     .sponsor-cta:hover { border-color: var(--border-glow); }
     .sponsor-cta-text h3 { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; margin-bottom: 8px; }
@@ -101,8 +130,13 @@
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
     /* FOOTER */
-    .footer { border-top: 1px solid var(--border-color); padding: 40px 0; text-align: center; }
-    .footer p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
+    .footer { border-top: none; padding: 48px 0 32px; position: relative; }
+    .footer::before { content: ''; display: block; height: 1px; background: linear-gradient(90deg, transparent 0%, rgba(30, 155, 216, 0.2) 25%, rgba(188, 164, 101, 0.15) 50%, rgba(30, 155, 216, 0.2) 75%, transparent 100%); margin-bottom: 48px; }
+    .footer p { font-size: 0.8rem; color: var(--text-muted); }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+    .footer-links { display: flex; gap: 24px; list-style: none; }
+    .footer-links a { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); font-family: var(--font-display); transition: color 0.2s; }
+    .footer-links a:hover { color: var(--accent-main); opacity: 1; }
 
     @media (max-width: 768px) {
       .nav-links { display: none; }
@@ -110,9 +144,16 @@
       .nav-links.open { display: flex; flex-direction: column; position: absolute; top: var(--nav-height); left: 0; right: 0; background: rgba(11, 15, 26, 0.97); backdrop-filter: blur(16px); padding: 24px; gap: 20px; border-bottom: 1px solid var(--border-color); }
       .sponsor-cta { flex-direction: column; text-align: center; }
     }
+    @media (max-width: 600px) { .footer-inner { flex-direction: column; align-items: center; text-align: center; } }
+    @media (prefers-reduced-motion: reduce) {
+      body::after, .ambient-orb, .page-header-grid { animation: none !important; }
+      .page-header h1 em { animation: none !important; background: var(--accent-main); -webkit-text-fill-color: var(--accent-main); }
+    }
   </style>
 </head>
 <body>
+
+  <div class="ambient-orb"></div>
 
   <nav class="nav" id="mainNav">
     <div class="container">
@@ -132,8 +173,9 @@
   </nav>
 
   <header class="page-header">
+    <div class="page-header-grid"></div>
     <p class="page-header-label">Our Sponsors</p>
-    <h1>Powered By Our Partners</h1>
+    <h1>Powered By Our <em>Partners</em></h1>
     <p>Our sponsors make it possible for students to design, build, and compete. We're grateful for their support.</p>
   </header>
 
@@ -164,7 +206,14 @@
 
   <footer class="footer">
     <div class="container">
-      <p>FRC Teams 3020 &amp; 5805 — Santa Margarita Catholic High School &nbsp;·&nbsp; <a href="index.html">← Back to home</a></p>
+      <div class="footer-inner">
+        <p>FRC Teams 3020 &amp; 5805 &nbsp;·&nbsp; Santa Margarita Catholic High School</p>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="teams.html">Teams</a></li>
+          <li><a href="sponsors.html">Sponsor Us</a></li>
+        </ul>
+      </div>
     </div>
   </footer>
 

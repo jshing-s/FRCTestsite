@@ -63,6 +63,31 @@
       z-index: 9999;
     }
 
+    body::after {
+      content: '';
+      position: fixed;
+      top: -30%; right: -15%;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(33, 64, 154, 0.09) 0%, transparent 65%);
+      pointer-events: none;
+      z-index: 0;
+      animation: ambientDrift 20s ease-in-out infinite;
+    }
+    .ambient-orb {
+      position: fixed;
+      bottom: -20%; left: -10%;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(30, 155, 216, 0.06) 0%, transparent 65%);
+      pointer-events: none;
+      z-index: 0;
+      animation: ambientDrift 15s ease-in-out infinite reverse;
+    }
+    @keyframes ambientDrift {
+      0%, 100% { transform: translate(0, 0); }
+      33%       { transform: translate(-40px, 30px); }
+      66%       { transform: translate(25px, -20px); }
+    }
+
     /* ======== NAV ======== */
     .nav {
       position: fixed;
@@ -178,9 +203,25 @@
       position: absolute;
       top: 0; left: 50%;
       transform: translateX(-50%);
-      width: 800px; height: 400px;
-      background: radial-gradient(ellipse at 50% 0%, rgba(30, 155, 216, 0.07), transparent 70%);
+      width: 800px; height: 500px;
+      background:
+        radial-gradient(ellipse 80% 50% at 50% 0%, rgba(30, 155, 216, 0.18) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 30% at 50% 0%, rgba(33, 64, 154, 0.12) 0%, transparent 50%);
       pointer-events: none;
+    }
+    .page-header-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(33, 64, 154, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(33, 64, 154, 0.05) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(ellipse 70% 80% at 50% 0%, black 0%, transparent 100%);
+      pointer-events: none;
+      animation: gridPulse 10s ease-in-out infinite;
+    }
+    @keyframes gridPulse {
+      0%, 100% { opacity: 0.7; }
+      50%       { opacity: 0.3; }
     }
 
     .page-header-label {
@@ -219,6 +260,8 @@
       max-width: 500px;
       margin: 0 auto;
     }
+    .page-header h1 em { font-style: normal; background: linear-gradient(135deg, var(--accent-main), #4ecbff, var(--accent-main)); background-size: 200% 200%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: gradientShift 4s ease-in-out infinite; }
+    @keyframes gradientShift { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
 
     /* ======== FILTER BAR ======== */
     .filter-bar {
@@ -257,6 +300,8 @@
     /* ======== GALLERY GRID ======== */
     .gallery-section {
       padding-bottom: 100px;
+      position: relative;
+      z-index: 1;
     }
 
     .gallery-grid {
@@ -307,6 +352,7 @@
       flex-direction: column;
       justify-content: flex-end;
       padding: 20px 16px 16px;
+      z-index: 2;
     }
 
     .gallery-item:hover .gallery-item-overlay {
@@ -332,6 +378,38 @@
     .tag-5805 { color: #4a6fd4; }
     .tag-both { color: var(--accent-gold); }
     .tag-event { color: #a0c4a0; }
+
+    /* ======== SKELETON LOADER ======== */
+    .img-skeleton::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(30, 155, 216, 0.07) 35%,
+        rgba(30, 155, 216, 0.15) 50%,
+        rgba(30, 155, 216, 0.07) 65%,
+        transparent 100%
+      );
+      background-size: 300% 100%;
+      animation: skeleton-shimmer 1.8s ease-in-out infinite;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .img-skeleton img {
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .img-skeleton.img-loaded::before { display: none; }
+    .img-skeleton.img-loaded img { opacity: 1; }
+
+    @keyframes skeleton-shimmer {
+      0%   { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
 
     /* Empty state */
     .gallery-empty {
@@ -462,20 +540,14 @@
     }
 
     /* ======== FOOTER ======== */
-    .footer {
-      border-top: 1px solid var(--border-color);
-      padding: 32px 0;
-      text-align: center;
-    }
-
-    .footer p {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
-
-    .footer a {
-      color: var(--accent-main);
-    }
+    .footer { border-top: none; padding: 48px 0 32px; position: relative; }
+    .footer::before { content: ''; display: block; height: 1px; background: linear-gradient(90deg, transparent 0%, rgba(30, 155, 216, 0.2) 25%, rgba(188, 164, 101, 0.15) 50%, rgba(30, 155, 216, 0.2) 75%, transparent 100%); margin-bottom: 48px; }
+    .footer p { font-size: 0.8rem; color: var(--text-muted); }
+    .footer a { color: var(--accent-main); }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+    .footer-links { display: flex; gap: 24px; list-style: none; }
+    .footer-links a { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); font-family: var(--font-display); transition: color 0.2s; }
+    .footer-links a:hover { color: var(--accent-main); opacity: 1; }
 
     /* ======== RESPONSIVE ======== */
     @media (max-width: 768px) {
@@ -508,9 +580,16 @@
         grid-template-columns: 1fr;
       }
     }
+    @media (max-width: 600px) { .footer-inner { flex-direction: column; align-items: center; text-align: center; } }
+    @media (prefers-reduced-motion: reduce) {
+      body::after, .ambient-orb, .page-header-grid { animation: none !important; }
+      .page-header h1 em { animation: none !important; background: var(--accent-main); -webkit-text-fill-color: var(--accent-main); }
+    }
   </style>
 </head>
 <body>
+
+  <div class="ambient-orb"></div>
 
   <!-- ==================== NAV ==================== -->
   <nav class="nav" id="mainNav">
@@ -536,8 +615,9 @@
 
   <!-- ==================== PAGE HEADER ==================== -->
   <header class="page-header">
+    <div class="page-header-grid"></div>
     <p class="page-header-label">Competition Photos</p>
-    <h1>Photo Gallery</h1>
+    <h1>Photo <em>Gallery</em></h1>
     <p>Behind the scenes, on the field, and everything in between.</p>
   </header>
 
@@ -577,7 +657,14 @@
   <!-- ==================== FOOTER ==================== -->
   <footer class="footer">
     <div class="container">
-      <p>FRC Teams 3020 &amp; 5805 — Santa Margarita Catholic High School &nbsp;·&nbsp; <a href="index.html">← Back to home</a></p>
+      <div class="footer-inner">
+        <p>FRC Teams 3020 &amp; 5805 &nbsp;·&nbsp; Santa Margarita Catholic High School</p>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="teams.html">Teams</a></li>
+          <li><a href="sponsors.html">Sponsor Us</a></li>
+        </ul>
+      </div>
     </div>
   </footer>
 
@@ -671,7 +758,7 @@
         const tc = tagConfig[photo.tag] || { label: photo.tag, className: '' };
 
         const item = document.createElement('div');
-        item.className = 'gallery-item';
+        item.className = 'gallery-item img-skeleton';
         item.innerHTML = `
           <img src="${photo.src}" alt="${photo.caption}" loading="lazy">
           <div class="gallery-item-overlay">
@@ -679,6 +766,14 @@
             <div class="gallery-item-tag ${tc.className}">${tc.label}</div>
           </div>
         `;
+        const img = item.querySelector('img');
+        const markLoaded = () => item.classList.add('img-loaded');
+        if (img.complete && img.naturalWidth > 0) {
+          markLoaded();
+        } else {
+          img.addEventListener('load', markLoaded);
+          img.addEventListener('error', markLoaded);
+        }
         item.addEventListener('click', () => openLightbox(i));
         grid.appendChild(item);
       });

@@ -37,6 +37,31 @@
       pointer-events: none; z-index: 9999;
     }
 
+    body::after {
+      content: '';
+      position: fixed;
+      top: -30%; right: -15%;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(33, 64, 154, 0.09) 0%, transparent 65%);
+      pointer-events: none;
+      z-index: 0;
+      animation: ambientDrift 20s ease-in-out infinite;
+    }
+    .ambient-orb {
+      position: fixed;
+      bottom: -20%; left: -10%;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(30, 155, 216, 0.06) 0%, transparent 65%);
+      pointer-events: none;
+      z-index: 0;
+      animation: ambientDrift 15s ease-in-out infinite reverse;
+    }
+    @keyframes ambientDrift {
+      0%, 100% { transform: translate(0, 0); }
+      33%       { transform: translate(-40px, 30px); }
+      66%       { transform: translate(25px, -20px); }
+    }
+
     /* NAV */
     .nav { position: fixed; top: 0; left: 0; right: 0; height: var(--nav-height); background: rgba(11, 15, 26, 0.85); backdrop-filter: blur(20px) saturate(1.2); border-bottom: 1px solid var(--border-color); z-index: 1000; display: flex; align-items: center; transition: background 0.3s, box-shadow 0.3s; }
     .nav.scrolled { background: rgba(11, 15, 26, 0.95); box-shadow: 0 4px 30px rgba(0,0,0,0.3); }
@@ -59,26 +84,36 @@
 
     /* PAGE HEADER */
     .page-header { padding-top: calc(var(--nav-height) + 80px); padding-bottom: 64px; text-align: center; position: relative; overflow: hidden; }
-    .page-header::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 800px; height: 400px; background: radial-gradient(ellipse at 50% 0%, rgba(30, 155, 216, 0.07), transparent 70%); pointer-events: none; }
+    .page-header::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 800px; height: 500px; background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(30, 155, 216, 0.18) 0%, transparent 70%), radial-gradient(ellipse 40% 30% at 50% 0%, rgba(33, 64, 154, 0.12) 0%, transparent 50%); pointer-events: none; }
+    .page-header-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(33, 64, 154, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(33, 64, 154, 0.05) 1px, transparent 1px); background-size: 48px 48px; mask-image: radial-gradient(ellipse 70% 80% at 50% 0%, black 0%, transparent 100%); pointer-events: none; animation: gridPulse 10s ease-in-out infinite; }
+    @keyframes gridPulse { 0%, 100% { opacity: 0.7; } 50% { opacity: 0.3; } }
     .page-header-label { font-family: var(--font-display); font-size: 0.8rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--accent-gold); margin-bottom: 16px; display: flex; align-items: center; justify-content: center; gap: 12px; }
     .page-header-label::before, .page-header-label::after { content: ''; width: 30px; height: 1px; background: var(--accent-gold); }
     .page-header h1 { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700; letter-spacing: -1px; margin-bottom: 16px; }
     .page-header p { color: var(--text-secondary); font-size: 1.05rem; font-weight: 300; max-width: 500px; margin: 0 auto; }
+    .page-header h1 em { font-style: normal; background: linear-gradient(135deg, var(--accent-main), #4ecbff, var(--accent-main)); background-size: 200% 200%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: gradientShift 4s ease-in-out infinite; }
+    @keyframes gradientShift { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
 
     /* ACHIEVEMENTS */
-    .achievements-section { padding: 0 0 100px; }
+    .achievements-section { padding: 64px 0 100px; background: var(--bg-secondary); position: relative; z-index: 1; }
 
     .timeline { position: relative; padding-left: 40px; max-width: 800px; margin: 0 auto; }
     .timeline::before {
       content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px;
-      background: linear-gradient(to bottom, var(--accent-main), var(--border-color), var(--accent-main));
-      background-size: 100% 200%;
+      background: linear-gradient(to bottom, var(--accent-main), #4a6fd4, var(--accent-main), #4a6fd4, var(--border-color));
+      background-size: 100% 400%;
       animation: timelineGradient 4s ease-in-out infinite;
     }
     @keyframes timelineGradient {
       0%, 100% { background-position: 0% 0%; }
       50% { background-position: 0% 100%; }
     }
+    .timeline-item--3020::before { background: var(--accent-main); box-shadow: 0 0 12px rgba(30,155,216,0.5); }
+    .timeline-item--3020::after { border-color: var(--accent-main); }
+    .timeline-item--3020 .timeline-year { color: var(--accent-main); }
+    .timeline-item--5805::before { background: #4a6fd4; box-shadow: 0 0 12px rgba(74,111,212,0.5); }
+    .timeline-item--5805::after { border-color: #4a6fd4; }
+    .timeline-item--5805 .timeline-year { color: #4a6fd4; }
 
     .timeline-item { position: relative; padding-bottom: 48px; transition: transform 0.3s; }
     .timeline-item:hover { transform: translateX(8px); }
@@ -107,17 +142,29 @@
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
     /* FOOTER */
-    .footer { border-top: 1px solid var(--border-color); padding: 40px 0; text-align: center; }
-    .footer p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
+    .footer { border-top: none; padding: 48px 0 32px; position: relative; }
+    .footer::before { content: ''; display: block; height: 1px; background: linear-gradient(90deg, transparent 0%, rgba(30, 155, 216, 0.2) 25%, rgba(188, 164, 101, 0.15) 50%, rgba(30, 155, 216, 0.2) 75%, transparent 100%); margin-bottom: 48px; }
+    .footer p { font-size: 0.8rem; color: var(--text-muted); }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+    .footer-links { display: flex; gap: 24px; list-style: none; }
+    .footer-links a { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); font-family: var(--font-display); transition: color 0.2s; }
+    .footer-links a:hover { color: var(--accent-main); opacity: 1; }
 
     @media (max-width: 768px) {
       .nav-links { display: none; }
       .nav-toggle { display: block; }
       .nav-links.open { display: flex; flex-direction: column; position: absolute; top: var(--nav-height); left: 0; right: 0; background: rgba(11, 15, 26, 0.97); backdrop-filter: blur(16px); padding: 24px; gap: 20px; border-bottom: 1px solid var(--border-color); }
     }
+    @media (max-width: 600px) { .footer-inner { flex-direction: column; align-items: center; text-align: center; } }
+    @media (prefers-reduced-motion: reduce) {
+      body::after, .ambient-orb, .page-header-grid { animation: none !important; }
+      .page-header h1 em { animation: none !important; background: var(--accent-main); -webkit-text-fill-color: var(--accent-main); }
+    }
   </style>
 </head>
 <body>
+
+  <div class="ambient-orb"></div>
 
   <nav class="nav" id="mainNav">
     <div class="container">
@@ -137,8 +184,9 @@
   </nav>
 
   <header class="page-header">
+    <div class="page-header-grid"></div>
     <p class="page-header-label">Achievements</p>
-    <h1>Our Track Record</h1>
+    <h1>Our Track <em>Record</em></h1>
     <p>From regional wins to community impact — here's what we've accomplished.</p>
   </header>
 
@@ -146,43 +194,43 @@
     <div class="container">
       <div class="timeline">
 
-        <div class="timeline-item reveal">
+        <div class="timeline-item timeline-item--5805 reveal">
           <div class="timeline-year">2026 Season</div>
           <h3 class="timeline-title">5805 — District Event Finalist</h3>
           <p class="timeline-desc">SMbly Required advanced to the playoff finals at the CA District Hueneme Port Event, losing a nail-biter championship match by a single point (169–170). Currently ranked #47 in the California District.</p>
         </div>
 
-        <div class="timeline-item reveal">
+        <div class="timeline-item timeline-item--5805 reveal">
           <div class="timeline-year">2025 Season</div>
           <h3 class="timeline-title">5805 — Regional Winners &amp; Beach Blitz Champions</h3>
           <p class="timeline-desc">SMbly Required had a breakout year — winning both the Ventura County Regional and the Beach Blitz off-season event, and reaching the finals of the SoCal Showdown.</p>
         </div>
 
-        <div class="timeline-item reveal">
+        <div class="timeline-item timeline-item--3020 reveal">
           <div class="timeline-year">2022 Season</div>
           <h3 class="timeline-title">3020 — Orange County Regional Finalist</h3>
           <p class="timeline-desc">SMbld made a strong post-COVID return, advancing to the finals at the Orange County Regional.</p>
         </div>
 
-        <div class="timeline-item reveal">
+        <div class="timeline-item timeline-item--5805 reveal">
           <div class="timeline-year">2019 Season</div>
           <h3 class="timeline-title">5805 — Regional Finalist &amp; World Championship</h3>
           <p class="timeline-desc">SMbly Required earned a Regional Finalist award and Wildcard at the Orange County Regional, punching their ticket to the FIRST Championship on the Turing Division.</p>
         </div>
 
-        <div class="timeline-item reveal">
+        <div class="timeline-item timeline-item--5805 reveal">
           <div class="timeline-year">2018 Season</div>
           <h3 class="timeline-title">5805 — Orange County Regional Winners</h3>
           <p class="timeline-desc">In just their third season, SMbly Required won the Orange County Regional and competed at the FIRST Championship on the Carver Division.</p>
         </div>
 
-        <div class="timeline-item reveal">
+        <div class="timeline-item timeline-item--5805 reveal">
           <div class="timeline-year">2016 Season</div>
           <h3 class="timeline-title">5805 — Rookie All Star &amp; Highest Rookie Seed</h3>
           <p class="timeline-desc">SMbly Required burst onto the scene in their debut year, earning both the Rookie All Star Award and the Highest Rookie Seed at the San Diego Regional, then competing at the FIRST Championship.</p>
         </div>
 
-        <div class="timeline-item reveal">
+        <div class="timeline-item timeline-item--3020 reveal">
           <div class="timeline-year">2009 Season</div>
           <h3 class="timeline-title">3020 — Rookie All Star Award</h3>
           <p class="timeline-desc">SMbld launched the robotics program at Santa Margarita Catholic High School, earning the prestigious Rookie All Star Award at the Los Angeles Regional in their inaugural season.</p>
@@ -194,7 +242,14 @@
 
   <footer class="footer">
     <div class="container">
-      <p>FRC Teams 3020 &amp; 5805 — Santa Margarita Catholic High School &nbsp;·&nbsp; <a href="index.html">← Back to home</a></p>
+      <div class="footer-inner">
+        <p>FRC Teams 3020 &amp; 5805 &nbsp;·&nbsp; Santa Margarita Catholic High School</p>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="teams.html">Teams</a></li>
+          <li><a href="sponsors.html">Sponsor Us</a></li>
+        </ul>
+      </div>
     </div>
   </footer>
 
