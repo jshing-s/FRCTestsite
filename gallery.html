@@ -378,7 +378,6 @@
 
     .tag-3020 { color: var(--accent-main); }
     .tag-5805 { color: #4a6fd4; }
-    .tag-both { color: var(--accent-gold); }
     .tag-event { color: #a0c4a0; }
 
     /* ======== SKELETON LOADER ======== */
@@ -628,7 +627,6 @@
     <button class="filter-btn active" data-filter="all">All Photos</button>
     <button class="filter-btn" data-filter="3020">Team 3020</button>
     <button class="filter-btn" data-filter="5805">Team 5805</button>
-    <button class="filter-btn" data-filter="both">Both Teams</button>
   </div>
 
   <!-- ==================== GALLERY ==================== -->
@@ -682,7 +680,7 @@
     //   {
     //     src:     "images/your-filename.jpg",   // path to the image
     //     caption: "Short description",           // shown on hover + lightbox
-    //     tag:     "3020"                         // "3020", "5805", "both", or "event"
+    //     tag:     "3020"                         // "3020", "5805", or "event"
     //   }
     // ================================================================
     const photos = [
@@ -731,7 +729,6 @@
     const tagConfig = {
       "3020":  { label: "Team 3020",  className: "tag-3020" },
       "5805":  { label: "Team 5805",  className: "tag-5805" },
-      "both":  { label: "Both Teams", className: "tag-both" },
     };
 
     // ================================================================
