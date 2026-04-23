@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"https://jshing-s.github.io/FRCTestsite/index.html\")",
-      "Bash(curl -s \"https://jshing-s.github.io/FRCTestsite/index.html\")"
+      "Bash(curl -s \"https://jshing-s.github.io/FRCTestsite/index.html\")",
+      "PowerShell(& powershell -ExecutionPolicy Bypass -File \"C:\\\\Users\\\\jacks\\\\downloads\\\\FRCTestsite\\\\tools\\\\resize-images.ps1\")"
     ]
   }
 }

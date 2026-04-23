@@ -321,6 +321,8 @@
       border: 1px solid var(--border-color);
       background: var(--bg-card);
       transition: border-color 0.3s, transform 0.3s;
+      content-visibility: auto;
+      contain-intrinsic-size: 260px 195px;
     }
 
     .gallery-item:hover {
@@ -759,8 +761,9 @@
 
         const item = document.createElement('div');
         item.className = 'gallery-item img-skeleton';
+        const thumbSrc = photo.src.replace('imgs/', 'imgs/thumbs/');
         item.innerHTML = `
-          <img src="${photo.src}" alt="${photo.caption}" loading="lazy">
+          <img src="${thumbSrc}" alt="${photo.caption}" loading="lazy" decoding="async">
           <div class="gallery-item-overlay">
             <div class="gallery-item-caption">${photo.caption}</div>
             <div class="gallery-item-tag ${tc.className}">${tc.label}</div>
@@ -814,7 +817,7 @@
     function updateLightbox() {
       const photo = filteredPhotos[lightboxIndex];
       const tc = tagConfig[photo.tag] || { label: photo.tag, className: '' };
-      lbImg.src = photo.src;
+      lbImg.src = photo.src.replace('imgs/', 'imgs/medium/');
       lbImg.alt = photo.caption;
       lbCaption.textContent = photo.caption;
       lbTag.textContent = tc.label;
