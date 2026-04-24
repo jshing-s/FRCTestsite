@@ -92,37 +92,96 @@
     .page-header-label::before, .page-header-label::after { content: ''; width: 30px; height: 1px; background: var(--accent-gold); }
     .page-header h1 { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700; letter-spacing: -1px; margin-bottom: 16px; }
     .page-header p { color: var(--text-secondary); font-size: 1.05rem; font-weight: 300; max-width: 500px; margin: 0 auto; }
-    .page-header h1 em { font-style: normal; background: linear-gradient(135deg, var(--accent-main), #4ecbff, var(--accent-main)); background-size: 200% 200%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: gradientShift 4s ease-in-out infinite; }
+    .page-header h1 em, .cluster-title em, .budget-heading em { font-style: normal; background: linear-gradient(135deg, var(--accent-main), #4ecbff, var(--accent-main)); background-size: 200% 200%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: gradientShift 4s ease-in-out infinite; }
     @keyframes gradientShift { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
 
     /* WHAT WE DO */
     .what-section { padding: 0 0 100px; position: relative; z-index: 1; }
 
-    .roles-marquee { margin-bottom: 48px; position: relative; overflow: hidden; padding: 8px 0; }
-    .roles-marquee::before, .roles-marquee::after { content: ''; position: absolute; top: 0; bottom: 0; width: 150px; z-index: 2; pointer-events: none; }
-    .roles-marquee::before { left: 0; background: linear-gradient(to right, var(--bg-primary), transparent); }
-    .roles-marquee::after { right: 0; background: linear-gradient(to left, var(--bg-primary), transparent); }
+    /* OVERVIEW STRIP */
+    .overview {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      margin-bottom: 96px;
+      border: 1px solid var(--border-color);
+      border-top: 2px solid var(--accent-main);
+      background: linear-gradient(180deg, rgba(30,155,216,0.06) 0%, var(--bg-secondary) 70%);
+    }
+    .overview-item { text-align: center; padding: 40px 24px; position: relative; }
+    .overview-item + .overview-item { border-left: 1px solid var(--border-color); }
+    .overview-value { font-family: var(--font-display); font-size: 2.5rem; font-weight: 700; color: var(--accent-main); line-height: 1; margin-bottom: 12px; transition: text-shadow 0.3s; }
+    .overview-item:hover .overview-value { text-shadow: 0 0 30px rgba(30, 155, 216, 0.5); }
+    .overview-label { font-family: var(--font-display); font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; color: var(--accent-gold); margin-bottom: 6px; }
+    .overview-note { font-size: 0.8rem; color: var(--text-secondary); }
 
-    .marquee-track { display: flex; gap: 20px; animation: marquee-scroll 35s linear infinite; }
-    .marquee-track:hover { animation-play-state: paused; }
-    @keyframes marquee-scroll {
-      from { transform: translateX(0); }
-      to { transform: translateX(calc(-50% - 10px)); }
+    /* CLUSTER */
+    .cluster { margin-bottom: 80px; }
+    .cluster-header { display: flex; align-items: baseline; gap: 20px; margin-bottom: 32px; }
+    .cluster-num { font-family: var(--font-display); font-size: 0.75rem; font-weight: 600; letter-spacing: 3px; color: var(--accent-gold); }
+    .cluster-title { font-family: var(--font-display); font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 700; line-height: 1.2; }
+    .cluster-rule { flex: 1; height: 1px; background: linear-gradient(90deg, var(--border-glow) 0%, transparent 100%); margin-bottom: 8px; }
+
+    .cluster-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
     }
 
-    .role-card { flex-shrink: 0; width: 300px; padding: 28px 24px; background: linear-gradient(170deg, rgba(30,155,216,0.05) 0%, var(--bg-card) 30%, rgba(20,28,48,0.5) 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,0.03), 0 2px 16px rgba(0,0,0,0.2); border: 1px solid var(--border-color); border-top: 2px solid transparent; border-image: linear-gradient(90deg, var(--accent-main), var(--accent-gold)) 1; border-image-slice: 1 0 0 0; transition: transform 0.3s, box-shadow 0.3s; }
-    .role-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25); }
+    .role-card {
+      padding: 28px 24px;
+      background: linear-gradient(170deg, rgba(30,155,216,0.05) 0%, var(--bg-card) 30%, rgba(20,28,48,0.5) 100%);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.03), 0 2px 16px rgba(0,0,0,0.2);
+      border: 1px solid var(--border-color);
+      border-top: 2px solid var(--accent-main);
+      transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+    }
+    .role-card:hover { transform: translateY(-6px); border-color: var(--border-glow); box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3); }
     .role-icon { width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; margin-bottom: 18px; background: linear-gradient(135deg, rgba(30,155,216,0.12), rgba(33,64,154,0.08)); border: 1px solid rgba(30,155,216,0.2); font-size: 1.4rem; position: relative; flex-shrink: 0; }
     .role-icon::before { content: ''; position: absolute; inset: -1px; background: linear-gradient(135deg, rgba(30,155,216,0.3), transparent 60%); opacity: 0; transition: opacity 0.3s; }
     .role-card:hover .role-icon::before { opacity: 1; }
     .role-card h3 { font-family: var(--font-display); font-size: 1.05rem; font-weight: 600; margin-bottom: 10px; }
     .role-card p { color: var(--text-secondary); font-size: 0.85rem; line-height: 1.55; }
 
-    .join-cta { text-align: center; padding: 48px; border: 1px dashed var(--border-glow); background: var(--accent-main-dim); position: relative; overflow: hidden; }
+    /* BUDGET BREAKDOWN */
+    .budget-section { margin-bottom: 80px; }
+    .budget-heading { text-align: center; margin-bottom: 40px; }
+    .budget-heading p.kicker { font-family: var(--font-display); font-size: 0.75rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--accent-gold); margin-bottom: 12px; }
+    .budget-heading h2 { font-family: var(--font-display); font-size: clamp(1.5rem, 3.5vw, 2.25rem); font-weight: 700; margin-bottom: 12px; }
+    .budget-heading p.lede { color: var(--text-secondary); max-width: 560px; margin: 0 auto; font-weight: 300; }
+
+    .budget-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    .budget-item {
+      padding: 32px 24px 40px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s, border-color 0.3s;
+    }
+    .budget-item:hover { transform: translateY(-4px); border-color: var(--border-glow); }
+    .budget-item::after {
+      content: '';
+      position: absolute; left: 0; bottom: 0;
+      height: 3px;
+      width: var(--pct, 0%);
+      background: linear-gradient(90deg, var(--accent-main), var(--accent-gold));
+      transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .budget-percent { font-family: var(--font-display); font-size: 2.75rem; font-weight: 700; color: var(--accent-main); line-height: 1; margin-bottom: 10px; }
+    .budget-label { font-family: var(--font-display); font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 10px; }
+    .budget-desc { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.5; }
+
+    /* JOIN CTA */
+    .join-cta { text-align: center; padding: 56px 32px; border: 1px dashed var(--border-glow); background: var(--accent-main-dim); position: relative; overflow: hidden; }
     .join-cta::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 50% 50%, rgba(30, 155, 216, 0.08), transparent 70%); animation: ctaPulse 4s ease-in-out infinite; }
     @keyframes ctaPulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.5); opacity: 0; } }
     .join-cta h3 { font-family: var(--font-display); font-size: 1.75rem; font-weight: 700; margin-bottom: 12px; position: relative; }
-    .join-cta p { color: var(--text-secondary); margin-bottom: 24px; position: relative; }
+    .join-cta p { color: var(--text-secondary); margin-bottom: 24px; position: relative; max-width: 520px; margin-left: auto; margin-right: auto; }
     .join-cta .btn { position: relative; }
 
     .btn { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-display); font-size: 0.875rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; padding: 14px 32px; border: none; cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
@@ -142,16 +201,30 @@
     .footer-links a { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); font-family: var(--font-display); transition: color 0.2s; }
     .footer-links a:hover { color: var(--accent-main); opacity: 1; }
 
+    @media (max-width: 900px) {
+      .overview { grid-template-columns: repeat(2, 1fr); }
+      .overview-item:nth-child(2) { border-left: 1px solid var(--border-color); }
+      .overview-item:nth-child(3) { border-left: none; border-top: 1px solid var(--border-color); }
+      .overview-item:nth-child(4) { border-top: 1px solid var(--border-color); }
+      .budget-grid { grid-template-columns: repeat(2, 1fr); }
+    }
     @media (max-width: 768px) {
       .nav-links { display: none; }
       .nav-toggle { display: block; }
       .nav-links.open { display: flex; flex-direction: column; position: absolute; top: var(--nav-height); left: 0; right: 0; background: rgba(11, 15, 26, 0.97); backdrop-filter: blur(16px); padding: 24px; gap: 20px; border-bottom: 1px solid var(--border-color); }
-      .roles-marquee::before, .roles-marquee::after { width: 60px; }
+      .cluster-header { flex-wrap: wrap; gap: 12px; }
+      .cluster-rule { display: none; }
     }
-    @media (max-width: 600px) { .footer-inner { flex-direction: column; align-items: center; text-align: center; } }
+    @media (max-width: 600px) {
+      .footer-inner { flex-direction: column; align-items: center; text-align: center; }
+      .overview { grid-template-columns: 1fr; }
+      .overview-item + .overview-item { border-left: none; border-top: 1px solid var(--border-color); }
+      .budget-grid { grid-template-columns: 1fr; }
+    }
     @media (prefers-reduced-motion: reduce) {
-      body::after, .ambient-orb, .page-header-grid { animation: none !important; }
-      .page-header h1 em { animation: none !important; background: var(--accent-main); -webkit-text-fill-color: var(--accent-main); }
+      body::after, .ambient-orb, .page-header-grid, .join-cta::before { animation: none !important; }
+      .page-header h1 em, .cluster-title em, .budget-heading em { animation: none !important; background: var(--accent-main); -webkit-text-fill-color: var(--accent-main); }
+      .budget-item::after { transition: none !important; }
     }
   </style>
 </head>
@@ -186,31 +259,140 @@
   <section class="what-section">
     <div class="container">
 
-      <div class="roles-marquee reveal">
-        <div class="marquee-track">
-          <!-- Set 1 -->
-          <div class="role-card"><div class="role-icon">⚙️</div><h3>Mechanical Engineering</h3><p>Students design and fabricate the robot's structure, mechanisms, and drivetrain using industry-standard tools, CNC machining, and hands-on building.</p></div>
-          <div class="role-card"><div class="role-icon">💻</div><h3>Software & Autonomous</h3><p>Teams write code in Java and Python for autonomous routines, driver controls, computer vision, and sensor integration — real-world programming experience.</p></div>
-          <div class="role-card"><div class="role-icon">🔌</div><h3>Electrical Systems</h3><p>Wiring, power distribution, motor controllers, and sensor integration. Students learn circuit design and troubleshooting on complex robotic systems.</p></div>
-          <div class="role-card"><div class="role-icon">🎨</div><h3>3D Design & CAD</h3><p>Students create detailed 3D models and technical drawings in SolidWorks and Onshape, turning concepts into manufacturing-ready plans.</p></div>
-          <div class="role-card"><div class="role-icon">🏭</div><h3>Fabrication & Prototyping</h3><p>From 3D printing to CNC routing and metal work, students gain hands-on manufacturing skills building functional robot components.</p></div>
-          <div class="role-card"><div class="role-icon">🧪</div><h3>Testing & Strategy</h3><p>Rigorous testing cycles, match strategy analysis, and data-driven scouting teach students the scientific method and critical thinking.</p></div>
-          <div class="role-card"><div class="role-icon">📢</div><h3>Business & Marketing</h3><p>Students manage budgets, write grant proposals, build brand identity, and run social media — real business skills for real-world applications.</p></div>
-          <div class="role-card"><div class="role-icon">🎬</div><h3>Media & Documentation</h3><p>Photography, videography, and graphic design bring the season to life. Students produce content for social media, sponsor reports, and events.</p></div>
-          <div class="role-card"><div class="role-icon">🤝</div><h3>Community Outreach</h3><p>STEM workshops, school demos, and mentoring younger teams. Our students give back and inspire the next generation of innovators.</p></div>
-          <!-- Set 2 (duplicate for seamless loop) -->
-          <div class="role-card"><div class="role-icon">⚙️</div><h3>Mechanical Engineering</h3><p>Students design and fabricate the robot's structure, mechanisms, and drivetrain using industry-standard tools, CNC machining, and hands-on building.</p></div>
-          <div class="role-card"><div class="role-icon">💻</div><h3>Software & Autonomous</h3><p>Teams write code in Java and Python for autonomous routines, driver controls, computer vision, and sensor integration — real-world programming experience.</p></div>
-          <div class="role-card"><div class="role-icon">🔌</div><h3>Electrical Systems</h3><p>Wiring, power distribution, motor controllers, and sensor integration. Students learn circuit design and troubleshooting on complex robotic systems.</p></div>
-          <div class="role-card"><div class="role-icon">🎨</div><h3>3D Design & CAD</h3><p>Students create detailed 3D models and technical drawings in SolidWorks and Onshape, turning concepts into manufacturing-ready plans.</p></div>
-          <div class="role-card"><div class="role-icon">🏭</div><h3>Fabrication & Prototyping</h3><p>From 3D printing to CNC routing and metal work, students gain hands-on manufacturing skills building functional robot components.</p></div>
-          <div class="role-card"><div class="role-icon">🧪</div><h3>Testing & Strategy</h3><p>Rigorous testing cycles, match strategy analysis, and data-driven scouting teach students the scientific method and critical thinking.</p></div>
-          <div class="role-card"><div class="role-icon">📢</div><h3>Business & Marketing</h3><p>Students manage budgets, write grant proposals, build brand identity, and run social media — real business skills for real-world applications.</p></div>
-          <div class="role-card"><div class="role-icon">🎬</div><h3>Media & Documentation</h3><p>Photography, videography, and graphic design bring the season to life. Students produce content for social media, sponsor reports, and events.</p></div>
-          <div class="role-card"><div class="role-icon">🤝</div><h3>Community Outreach</h3><p>STEM workshops, school demos, and mentoring younger teams. Our students give back and inspire the next generation of innovators.</p></div>
+      <!-- OVERVIEW STRIP -->
+      <div class="overview reveal">
+        <div class="overview-item">
+          <div class="overview-value">2</div>
+          <div class="overview-label">FRC Teams</div>
+          <div class="overview-note">3020 &amp; 5805</div>
+        </div>
+        <div class="overview-item">
+          <div class="overview-value">9</div>
+          <div class="overview-label">Disciplines</div>
+          <div class="overview-note">From CAD to outreach</div>
+        </div>
+        <div class="overview-item">
+          <div class="overview-value">6</div>
+          <div class="overview-label">Week Build</div>
+          <div class="overview-note">From kickoff to compete</div>
+        </div>
+        <div class="overview-item">
+          <div class="overview-value">50+</div>
+          <div class="overview-label">Students</div>
+          <div class="overview-note">Across both teams</div>
         </div>
       </div>
 
+      <!-- CLUSTER 1: ENGINEERING & BUILD -->
+      <div class="cluster reveal">
+        <div class="cluster-header">
+          <span class="cluster-num">01</span>
+          <h2 class="cluster-title">Engineering &amp; <em>Build</em></h2>
+          <span class="cluster-rule"></span>
+        </div>
+        <div class="cluster-grid">
+          <div class="role-card">
+            <div class="role-icon">⚙️</div>
+            <h3>Mechanical Engineering</h3>
+            <p>Students design and fabricate the robot's structure, mechanisms, and drivetrain using industry-standard tools, CNC machining, and hands-on building.</p>
+          </div>
+          <div class="role-card">
+            <div class="role-icon">🔌</div>
+            <h3>Electrical Systems</h3>
+            <p>Wiring, power distribution, motor controllers, and sensor integration. Students learn circuit design and troubleshooting on complex robotic systems.</p>
+          </div>
+          <div class="role-card">
+            <div class="role-icon">🎨</div>
+            <h3>3D Design &amp; CAD</h3>
+            <p>Students create detailed 3D models and technical drawings in SolidWorks and Onshape, turning concepts into manufacturing-ready plans.</p>
+          </div>
+          <div class="role-card">
+            <div class="role-icon">🏭</div>
+            <h3>Fabrication &amp; Prototyping</h3>
+            <p>From 3D printing to CNC routing and metal work, students gain hands-on manufacturing skills building functional robot components.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- CLUSTER 2: CODE & STRATEGY -->
+      <div class="cluster reveal">
+        <div class="cluster-header">
+          <span class="cluster-num">02</span>
+          <h2 class="cluster-title">Code &amp; <em>Strategy</em></h2>
+          <span class="cluster-rule"></span>
+        </div>
+        <div class="cluster-grid">
+          <div class="role-card">
+            <div class="role-icon">💻</div>
+            <h3>Software &amp; Autonomous</h3>
+            <p>Teams write code in Java and Python for autonomous routines, driver controls, computer vision, and sensor integration — real-world programming experience.</p>
+          </div>
+          <div class="role-card">
+            <div class="role-icon">🧪</div>
+            <h3>Testing &amp; Strategy</h3>
+            <p>Rigorous testing cycles, match strategy analysis, and data-driven scouting teach students the scientific method and critical thinking.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- CLUSTER 3: GROW THE PROGRAM -->
+      <div class="cluster reveal">
+        <div class="cluster-header">
+          <span class="cluster-num">03</span>
+          <h2 class="cluster-title">Grow the <em>Program</em></h2>
+          <span class="cluster-rule"></span>
+        </div>
+        <div class="cluster-grid">
+          <div class="role-card">
+            <div class="role-icon">📢</div>
+            <h3>Business &amp; Marketing</h3>
+            <p>Students manage budgets, write grant proposals, build brand identity, and run social media — real business skills for real-world applications.</p>
+          </div>
+          <div class="role-card">
+            <div class="role-icon">🎬</div>
+            <h3>Media &amp; Documentation</h3>
+            <p>Photography, videography, and graphic design bring the season to life. Students produce content for social media, sponsor reports, and events.</p>
+          </div>
+          <div class="role-card">
+            <div class="role-icon">🤝</div>
+            <h3>Community Outreach</h3>
+            <p>STEM workshops, school demos, and mentoring younger teams. Our students give back and inspire the next generation of innovators.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- BUDGET BREAKDOWN -->
+      <div class="budget-section reveal">
+        <div class="budget-heading">
+          <p class="kicker">Sponsor Impact</p>
+          <h2>Where Every <em>Dollar</em> Goes</h2>
+          <p class="lede">A typical season's budget breaks down roughly like this. Every contribution directly funds student learning.</p>
+        </div>
+        <div class="budget-grid" id="budgetGrid">
+          <div class="budget-item" data-pct="40">
+            <div class="budget-percent">40%</div>
+            <div class="budget-label">Materials</div>
+            <div class="budget-desc">Aluminum, polycarbonate, motors, pneumatics, and electronics to build the robot.</div>
+          </div>
+          <div class="budget-item" data-pct="30">
+            <div class="budget-percent">30%</div>
+            <div class="budget-label">Competition</div>
+            <div class="budget-desc">Regional registration fees, travel, and logistics to get students to the field.</div>
+          </div>
+          <div class="budget-item" data-pct="20">
+            <div class="budget-percent">20%</div>
+            <div class="budget-label">Tools &amp; Shop</div>
+            <div class="budget-desc">CNC, 3D printers, hand tools, and workshop upgrades that stay with the program.</div>
+          </div>
+          <div class="budget-item" data-pct="10">
+            <div class="budget-percent">10%</div>
+            <div class="budget-label">Outreach</div>
+            <div class="budget-desc">STEM demos, mentorship events, and community programs for younger students.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA -->
       <div class="join-cta reveal">
         <h3>Invest in the Next Generation</h3>
         <p>Every dollar goes directly toward materials, tools, registration, and travel — empowering students to learn by doing.</p>
@@ -248,6 +430,20 @@
       entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
     }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
     revealEls.forEach(el => obs.observe(el));
+
+    // Budget bars animate on scroll into view
+    const budgetGrid = document.getElementById('budgetGrid');
+    const budgetObs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          budgetGrid.querySelectorAll('.budget-item').forEach(item => {
+            item.style.setProperty('--pct', item.dataset.pct + '%');
+          });
+          budgetObs.disconnect();
+        }
+      });
+    }, { threshold: 0.3 });
+    budgetObs.observe(budgetGrid);
   </script>
 
 </body>
